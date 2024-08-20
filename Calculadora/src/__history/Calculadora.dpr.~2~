@@ -1,0 +1,15 @@
+program Calculadora;
+
+uses
+  Vcl.Forms,
+  Calculadora.View.Principal in 'View\Calculadora.View.Principal.pas' {FormPrincipal},
+  Classes.Calculadora in 'Classes\Classes.Calculadora.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TFormPrincipal, FormPrincipal);
+  Application.Run;
+end.

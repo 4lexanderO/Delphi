@@ -1,0 +1,17 @@
+unit Interfaces.Calculadora;
+
+interface
+
+type
+  iCalculadora = interface
+    ['{1FA140C4-41EC-437B-820F-0AE0627FCF58}']
+
+    function Somar(Value : Double) : iCalculadora;
+    function Subtrair(Value : Double) : iCalculadora;
+    function Dividir(Value : Double) : iCalculadora;
+    function Multiplicar(Value : Double) : iCalculadora;
+  end;
+
+implementation
+
+end.

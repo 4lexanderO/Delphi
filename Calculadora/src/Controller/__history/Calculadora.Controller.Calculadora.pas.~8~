@@ -1,0 +1,98 @@
+unit Calculadora.Controller.Calculadora;
+
+interface
+
+uses
+  Calculadora.Interfaces.Controller.Calculadora, Calculadora.Model.Calculadora;
+
+type
+  TOperacao = (tpNenhuma, tpSoma, tpSubtracao, tpDivisao, tpMultiplicacao);
+
+  TControllerCalculadora = class(TInterfacedObject, iControllerCalculadora)
+  private
+    FCalculadora: TCalculadora;
+    FOperador: TOperacao;
+  public
+    function Numero1(Numero: Double): IControllerCalculadora; overload;
+    function Numero1: Double; overload;
+    function Numero2(Numero: Double): IControllerCalculadora; overload;
+    function Numero2: Double; overload;
+
+    function Somar: Double;
+    function Subtrair: Double;
+    function Dividir: Double;
+    function Multiplicar: Double;
+
+    property Operador: TOperacao read FOperador write FOperador;
+
+    constructor Create;
+    destructor Destroy; override;
+
+    class function New: TControllerCalculadora;
+end;
+
+implementation
+
+{ TControllerCalculadora }
+
+constructor TControllerCalculadora.Create;
+begin
+  if not Assigned(FCalculadora) then
+    FCalculadora := TCalculadora.New;
+
+  Operador := tpNenhuma;
+end;
+
+destructor TControllerCalculadora.Destroy;
+begin
+  inherited;
+end;
+
+function TControllerCalculadora.Dividir: Double;
+begin
+  Result := FCalculadora.Dividir;
+end;
+
+function TControllerCalculadora.Multiplicar: Double;
+begin
+  Result := FCalculadora.Multiplicar;
+end;
+
+function TControllerCalculadora.Numero1(Numero: Double): IControllerCalculadora;
+begin
+  FCalculadora.Numero1(Numero);
+  Result := Self;
+end;
+
+class function TControllerCalculadora.New: TControllerCalculadora;
+begin
+  Result := Self.Create;
+end;
+
+function TControllerCalculadora.Numero1: Double;
+begin
+  Result := FCalculadora.Numero1;
+end;
+
+function TControllerCalculadora.Numero2: Double;
+begin
+  Result := FCalculadora.Numero2;
+end;
+
+function TControllerCalculadora.Numero2(Numero: Double): IControllerCalculadora;
+begin
+  FCalculadora.Numero2(Numero);
+  Result := Self;
+end;
+
+function TControllerCalculadora.Somar: Double;
+begin
+  Result := FCalculadora.Somar;
+end;
+
+function TControllerCalculadora.Subtrair: Double;
+begin
+  Result := FCalculadora.Subtrair;
+end;
+
+end.
