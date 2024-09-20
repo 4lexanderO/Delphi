@@ -1,0 +1,17 @@
+unit SisVendas.Model.Cliente;
+
+interface
+
+uses
+  SisVendas.Interfaces.Cliente;
+
+type
+  TCliente = class(TInterfacedObject, ICliente)
+    private
+    public
+
+  end;
+
+implementation
+
+end.

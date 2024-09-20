@@ -1,0 +1,7 @@
+unit SisVendas.Interfaces.Factory.Model.Cliente;
+
+interface
+
+implementation
+
+end.

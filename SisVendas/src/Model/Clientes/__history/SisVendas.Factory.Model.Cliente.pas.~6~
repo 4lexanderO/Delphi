@@ -1,0 +1,45 @@
+unit SisVendas.Factory.Model.Cliente;
+
+interface
+
+uses
+  SisVendas.Model.Cliente,
+  SisVendas.Interfaces.Cliente,
+  SisVendas.Interfaces.Factory.Model.Cliente;
+
+type
+  TFactoryCliente = class(TInterfacedObject, IFactoryCliente)
+    private
+    public
+      constructor Create;
+      destructor Destroy; override;
+      class function New: TFactoryCliente;
+
+      function Cliente: ICliente;
+  end;
+
+implementation
+
+{ TFactoryCliente }
+
+constructor TFactoryCliente.Create;
+begin
+  inherited;
+end;
+
+destructor TFactoryCliente.Destroy;
+begin
+  inherited;
+end;
+
+class function TFactoryCliente.New: TFactoryCliente;
+begin
+  Result := Self.Create;
+end;
+
+function TFactoryCliente.Cliente: ICliente;
+begin
+  Result := TCliente.New;
+end;
+
+end.

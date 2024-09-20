@@ -1,0 +1,17 @@
+program SisVendas;
+
+uses
+  Vcl.Forms,
+  SisVendas.View.Principal in 'View\SisVendas.View.Principal.pas' {Form1},
+  SisVendas.Interfaces.Cliente in 'Model\Clientes\SisVendas.Interfaces.Cliente.pas',
+  SisVendas.Model.Cliente in 'Model\Clientes\SisVendas.Model.Cliente.pas',
+  SisVendas.Factory.Model.Cliente in 'Model\Clientes\SisVendas.Factory.Model.Cliente.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

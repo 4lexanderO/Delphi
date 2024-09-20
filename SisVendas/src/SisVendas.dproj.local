@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/09/19 11:29:37.000.994,=D:\Sistemas\Unit1.pas</Transaction>
+    <Transaction>2024/09/20 10:01:11.000.006,=D:\Sistemas\Unit1.pas</Transaction>
+    <Transaction>2024/09/20 10:02:04.000.684,D:\Sistemas\Unit1.pas=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\View\SisVendas.View.Principal.pas</Transaction>
+    <Transaction>2024/09/20 10:02:04.000.684,D:\Sistemas\Unit1.dfm=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\View\SisVendas.View.Principal.dfm</Transaction>
+    <Transaction>2024/09/20 10:02:11.000.325,D:\Sistemas\Project1.dproj=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\SisVendas.dproj</Transaction>
+    <Transaction>2024/09/20 10:02:16.000.485,=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas</Transaction>
+    <Transaction>2024/09/20 10:02:47.000.216,C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Cadastros\Clientes\SisVendas.Model.Cliente.pas</Transaction>
+    <Transaction>2024/09/20 10:02:54.000.106,=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas</Transaction>
+    <Transaction>2024/09/20 10:03:11.000.398,C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Cadastros\Clientes\SisVendas.Interfaces.Cliente.pas</Transaction>
+    <Transaction>2024/09/20 11:57:56.692,=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Clientes\SisVendas.Interfaces.Cliente.pas</Transaction>
+    <Transaction>2024/09/20 11:58:04.709,=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Clientes\SisVendas.Model.Cliente.pas</Transaction>
+    <Transaction>2024/09/20 11:58:14.309,=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas</Transaction>
+    <Transaction>2024/09/20 11:58:31.960,C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Clientes\SisVendas.Factory.Model.Cliente.pas=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas</Transaction>
+    <Transaction>2024/09/20 11:58:38.396,=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas</Transaction>
+    <Transaction>2024/09/20 11:58:54.050,C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Clientes\SisVendas.Interfaces.Factory.Model.Cliente.pas=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>
