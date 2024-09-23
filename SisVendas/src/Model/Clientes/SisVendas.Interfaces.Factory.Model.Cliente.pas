@@ -1,3 +1,10 @@
+//
+// Desenvolvido por Alexander Oliveira
+//
+// github: https://www.linkedin.com/in/alexanderwoliveira/
+// linkedin: https://github.com/4lexanderO/
+//
+
 unit SisVendas.Interfaces.Factory.Model.Cliente;
 
 interface

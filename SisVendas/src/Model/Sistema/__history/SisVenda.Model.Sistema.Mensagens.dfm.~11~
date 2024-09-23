@@ -1,0 +1,193 @@
+object Form_Sistema_Mensagens: TForm_Sistema_Mensagens
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Form_Sistema_Mensagens'
+  ClientHeight = 436
+  ClientWidth = 592
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  TextHeight = 15
+  object PnlMensagem: TPanel
+    Left = 0
+    Top = 0
+    Width = 592
+    Height = 386
+    Align = alClient
+    Caption = 'PnlMensagem'
+    Color = clWhite
+    ParentBackground = False
+    ShowCaption = False
+    TabOrder = 0
+    ExplicitWidth = 439
+    ExplicitHeight = 169
+    object pnlImagem: TPanel
+      Left = 1
+      Top = 1
+      Width = 185
+      Height = 384
+      Align = alLeft
+      BevelOuter = bvNone
+      Caption = 'pnlImagem'
+      Color = clWhite
+      Padding.Left = 10
+      Padding.Top = 10
+      Padding.Right = 10
+      ParentBackground = False
+      ShowCaption = False
+      TabOrder = 0
+      ExplicitLeft = 192
+      ExplicitTop = 200
+      ExplicitHeight = 41
+      object SkImage: TSkAnimatedImage
+        Left = 10
+        Top = 10
+        Width = 165
+        Height = 163
+        Align = alTop
+        Animation.Loop = False
+        ExplicitLeft = 11
+        ExplicitTop = 11
+        ExplicitWidth = 163
+      end
+    end
+    object PnlDados: TPanel
+      Left = 186
+      Top = 1
+      Width = 405
+      Height = 384
+      Align = alClient
+      Caption = 'PnlDados'
+      Color = clWhite
+      Padding.Left = 10
+      Padding.Top = 10
+      Padding.Right = 10
+      Padding.Bottom = 10
+      ParentBackground = False
+      TabOrder = 1
+      ExplicitLeft = 312
+      ExplicitTop = 216
+      ExplicitWidth = 185
+      ExplicitHeight = 41
+      object MemoMensagem: TMemo
+        Left = 11
+        Top = 11
+        Width = 383
+        Height = 362
+        Align = alClient
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        ExplicitHeight = 456
+      end
+    end
+  end
+  object PnlBotoes: TPanel
+    Left = 0
+    Top = 386
+    Width = 592
+    Height = 50
+    Align = alBottom
+    Caption = 'PnlBotoes'
+    Color = clWhite
+    ParentBackground = False
+    ShowCaption = False
+    TabOrder = 1
+    ExplicitTop = 396
+    object SpeedButton1: TSpeedButton
+      Left = 232
+      Top = 16
+      Width = 23
+      Height = 22
+    end
+    object BtnFechar: TSpeedButton
+      Left = 496
+      Top = 1
+      Width = 95
+      Height = 48
+      Align = alRight
+      Caption = 'Fechar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object SpeedButton3: TSpeedButton
+      Left = 116
+      Top = 1
+      Width = 95
+      Height = 48
+      Align = alRight
+      Caption = 'Fechar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      ExplicitLeft = 496
+    end
+    object SpeedButton4: TSpeedButton
+      Left = 211
+      Top = 1
+      Width = 95
+      Height = 48
+      Align = alRight
+      Caption = 'Fechar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      ExplicitLeft = 496
+    end
+    object BtnConfirmar: TSpeedButton
+      Left = 306
+      Top = 1
+      Width = 95
+      Height = 48
+      Align = alRight
+      Caption = 'Confirmar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      ExplicitLeft = 496
+    end
+    object BtnCancelar: TSpeedButton
+      Left = 401
+      Top = 1
+      Width = 95
+      Height = 48
+      Align = alRight
+      Caption = 'Cancelar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      ExplicitLeft = 496
+    end
+  end
+  object ImlBotoes: TImageList
+    Left = 24
+    Top = 328
+  end
+end

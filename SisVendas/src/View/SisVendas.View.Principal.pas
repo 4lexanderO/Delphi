@@ -1,3 +1,10 @@
+//
+// Desenvolvido por Alexander Oliveira
+//
+// github: https://www.linkedin.com/in/alexanderwoliveira/
+// linkedin: https://github.com/4lexanderO/
+//
+
 unit SisVendas.View.Principal;
 
 interface
@@ -14,11 +21,17 @@ uses
   Vcl.Dialogs,
   Vcl.Buttons,
   SisVendas.Interfaces.Cliente,
-  SisVendas.Model.Cliente, SisVendas.Interfaces.Factory.Model.Cliente;
+  SisVendas.Model.Cliente, SisVendas.Interfaces.Factory.Model.Cliente,
+  Vcl.ComCtrls, SisVenda.Model.Sistema.Mensagens;
 type
   TForm_Principal = class(TForm)
-    SpeedButton1: TSpeedButton;
+    PgcPrincipal: TPageControl;
+    TsPrincipal: TTabSheet;
+    TsClientes: TTabSheet;
+    TsProdutos: TTabSheet;
+    TsVendas: TTabSheet;
     procedure SpeedButton1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,9 +45,18 @@ var
 implementation
 
 uses
-  SisVendas.Factory.Model.Cliente;
+  SisVendas.Factory.Model.Cliente,
+  SisVendas.Model.Sistema.Mensagens,
+  SisVendas.Interfaces.Model.Sistema.Mensagens;
 
 {$R *.dfm}
+
+procedure TForm_Principal.FormShow(Sender: TObject);
+begin
+  PgcPrincipal.ActivePageIndex := 0;
+
+  TMensagem.New.Mensagem(tmCustom, 'Bem-vindo(a) ao SisVendas!', 'Este sistema está sendo desenvolvido como portfólio de Alexander Oliveira!');
+end;
 
 procedure TForm_Principal.SpeedButton1Click(Sender: TObject);
 begin

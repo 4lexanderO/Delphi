@@ -1,0 +1,18 @@
+unit SisVendas.Interfaces.Model.Sistema.Mensagens;
+
+interface
+
+type
+  TTipoMensagem = (tmAlert, tmError, tmSuccess);
+
+  TTipoBotoes = (tbYesNo, tbOk);
+
+  IException = interface
+    ['{6C42B48A-A462-48BE-95E1-02D451D7FCDF}']
+
+    procedure ThrowException(TipoMensagem: TTipoMensagem; TipoBotoes: TTipoBotoes; Mensagem: string);
+  end;
+
+implementation
+
+end.

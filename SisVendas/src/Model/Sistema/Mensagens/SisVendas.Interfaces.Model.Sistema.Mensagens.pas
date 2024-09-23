@@ -1,0 +1,25 @@
+//
+// Desenvolvido por Alexander Oliveira
+//
+// github: https://www.linkedin.com/in/alexanderwoliveira/
+// linkedin: https://github.com/4lexanderO/
+//
+
+unit SisVendas.Interfaces.Model.Sistema.Mensagens;
+
+interface
+
+uses
+  SisVenda.Model.Sistema.Mensagens;
+
+type
+  IMensagem = interface
+    ['{6C42B48A-A462-48BE-95E1-02D451D7FCDF}']
+
+    procedure Mensagem(TipoMensagem: TTipoMensagem; Titulo, Mensagem: string);
+    procedure Exception(TipoMensagem: TTipoMensagem; TipoBotoes: TTipoBotoes; Titulo, Mensagem: string);
+  end;
+
+implementation
+
+end.

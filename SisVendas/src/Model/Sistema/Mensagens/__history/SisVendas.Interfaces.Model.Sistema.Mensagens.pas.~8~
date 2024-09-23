@@ -1,0 +1,17 @@
+unit SisVendas.Interfaces.Model.Sistema.Mensagens;
+
+interface
+
+uses
+  SisVenda.Model.Sistema.Mensagens;
+
+type
+  IException = interface
+    ['{6C42B48A-A462-48BE-95E1-02D451D7FCDF}']
+
+    procedure NewException(TipoMensagem: TTipoMensagem; TipoBotoes: TTipoBotoes; Mensagem: string);
+  end;
+
+implementation
+
+end.

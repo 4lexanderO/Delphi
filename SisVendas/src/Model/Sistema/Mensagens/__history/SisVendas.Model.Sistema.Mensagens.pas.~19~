@@ -1,0 +1,50 @@
+﻿unit SisVendas.Model.Sistema.Mensagens;
+
+interface
+
+uses
+  SisVendas.Interfaces.Model.Sistema.Mensagens,
+  SisVenda.Model.Sistema.Mensagens;
+
+type
+  TException = class(TInterfacedObject, IException)
+    private
+      FForm: TForm_Sistema_Mensagens;
+      constructor Create;
+      destructor Destroy; override;
+    public
+      class function New: IException;
+
+      procedure NewException(TipoMensagem: TTipoMensagem; TipoBotoes: TTipoBotoes; Mensagem: string);
+  end;
+
+implementation
+
+uses
+  System.SysUtils;
+
+{ TException }
+
+constructor TException.Create;
+begin
+  FForm := TForm_Sistema_Mensagens.Create(nil);
+end;
+
+destructor TException.Destroy;
+begin
+  inherited;
+
+  FreeAndNil(FForm);
+end;
+
+class function TException.New: IException;
+begin
+  Result := Self.Create;
+end;
+
+procedure TException.NewException(TipoMensagem: TTipoMensagem; TipoBotoes: TTipoBotoes; Mensagem: string);
+begin
+  FForm.ShowException(TipoMensagem, TipoBotoes, Mensagem);
+end;
+
+end.

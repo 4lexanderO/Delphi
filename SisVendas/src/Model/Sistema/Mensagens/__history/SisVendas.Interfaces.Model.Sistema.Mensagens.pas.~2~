@@ -1,0 +1,14 @@
+unit SisVendas.Interfaces.Model.Sistema.Mensagens;
+
+interface
+
+type
+  IException = interface
+    ['{6C42B48A-A462-48BE-95E1-02D451D7FCDF}']
+
+    procedure ThrowException;
+  end;
+
+implementation
+
+end.
