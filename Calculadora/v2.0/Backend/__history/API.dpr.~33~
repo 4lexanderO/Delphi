@@ -1,0 +1,87 @@
+program API;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses
+  Horse,
+  Horse.BasicAuthentication,
+  Horse.Jhonson,
+  System.SysUtils,
+  StrUtils,
+  JSON;
+
+var
+  App: THorse;
+
+begin
+  ReportMemoryLeaksOnShutdown := True;
+
+  App := THorse.Create;
+
+  App.Use(HorseBasicAuthentication(
+  function (const User, Password: string): boolean
+  begin
+    Result := User.Equals('User') and Password.Equals('Password');
+  end));
+
+  App.Use(Jhonson);
+
+  App.Post('/somar',
+  procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+  var
+    LJSON: TJSONObject;
+    Numero1, Numero2: double;
+  begin
+    LJSON := Req.Body<TJSONObject>.Clone as TJSONObject;
+
+    Numero1 := StrToFloat(LJSON.GetValue('numero1').ToString);
+    Numero2 := StrToFloat(LJSON.GetValue('numero2').ToString);
+
+    LJSON.AddPair('resultado', (Numero1 + Numero2));
+
+    Writeln('-------------------------');
+    Writeln('Operação: Soma');
+    Writeln('Numero 1: ' + Numero1.ToString);
+    Writeln('Numero 2: ' + Numero2.ToString);
+    Writeln('Resultado: ' + FloatToStr(Numero1 + Numero2));
+
+    Res.Send<TJSONObject>(LJSON);
+  end);
+
+  App.Post('/subtrair',
+  procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+  var
+    LJSON: TJSONObject;
+    Numero1, Numero2: Double;
+  begin
+    LJSON := Req.Body<TJSONObject>.Clone as TJSONObject;
+
+    Numero1 := StrToFloat(LJSON.GetValue('numero1').ToString);
+    Numero2 := StrToFloat(LJSON.GetValue('numero2').ToString);
+
+    LJSON.AddPair('resultado', (Numero1 - Numero2));
+
+    Writeln('-------------------------');
+    Writeln('Operação: Subtração');
+    Writeln('Numero 1: ' + Numero1.ToString);
+    Writeln('Numero 2: ' + Numero2.ToString);
+    Writeln('Resultado: ' + FloatToStr(Numero1 - Numero2));
+
+    Res.Send<TJSONObject>(LJSON);
+  end);
+
+
+  App.Post('/dividir',
+  procedure (Req: THorseRequest; Res: THorseResponse; Next: TProc)
+  var
+    LJSON: TJSONObject;
+    Numero1, Numero2: Double;
+  begin
+    LJSON := Req.Body<TJSONObject>.Clone as TJSONObject;
+
+  end);
+
+  App.Listen(9000);
+end.
