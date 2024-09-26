@@ -14,8 +14,7 @@ uses
   Vcl.Dialogs,
   Vcl.ExtCtrls,
   Vcl.Buttons,
-  Vcl.StdCtrls, Calculadora.Interfaces.Controller.Calculadora,
-  ShellAPI;
+  Vcl.StdCtrls, Calculadora.Interfaces.Controller.Calculadora;
 
 type
   TFormPrincipal = class(TForm)
@@ -252,8 +251,6 @@ procedure TFormPrincipal.FormShow(Sender: TObject);
 begin
   edtCalculando.Clear;
   edtCalculado.Clear;
-
-  ShellExecute(handle, 'open', PChar(GetCurrentDir + '\API.exe'), '', '', SW_SHOWNORMAL);
 end;
 
 procedure TFormPrincipal.InserirNumero(Numero: String);

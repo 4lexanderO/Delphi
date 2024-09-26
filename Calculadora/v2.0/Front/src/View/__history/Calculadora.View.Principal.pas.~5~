@@ -253,7 +253,7 @@ begin
   edtCalculando.Clear;
   edtCalculado.Clear;
 
-  ShellExecute(handle, 'open', PChar(GetCurrentDir + '\API.exe'), '', '', SW_SHOWNORMAL);
+  ShellExecute(handle, 'open', PChar(GetCurrentDir + 'API.exe'), '', '', SW_SHOWNORMAL);
 end;
 
 procedure TFormPrincipal.InserirNumero(Numero: String);

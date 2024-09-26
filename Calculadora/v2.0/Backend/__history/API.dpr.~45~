@@ -19,7 +19,7 @@ begin
   Writeln('Bem-vindo(a) à Calculadora API!');
   Writeln('');
   Writeln('Esse projeto tem por objetivo a prática do uso de criação de APIs Rest usando Horse, ');
-  Writeln('e o consumo dela mesma manipulando JSON através de RestRequest e RestResponse.');
+  Writeln('e o consumo dela mesma manipulando JSON.');
   Writeln('-------------------------');
   Writeln('');
 

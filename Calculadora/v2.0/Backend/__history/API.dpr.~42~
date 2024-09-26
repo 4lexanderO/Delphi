@@ -28,6 +28,12 @@ begin
 
   App.Use(Jhonson);
 
+  App.Get('/ping',
+  procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+  begin
+    Res.Send('pong');
+  end);
+
   App.Post('/somar',
   procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
   var
@@ -36,8 +42,8 @@ begin
   begin
     LJSON := Req.Body<TJSONObject>.Clone as TJSONObject;
 
-    Numero1 := StrToFloat(LJSON.GetValue('numero1').ToString);
-    Numero2 := StrToFloat(LJSON.GetValue('numero2').ToString);
+    Numero1 := LJSON.GetValue<Double>('numero1');
+    Numero2 := LJSON.GetValue<Double>('numero2');
 
     LJSON.AddPair('resultado', (Numero1 + Numero2));
 
@@ -58,8 +64,8 @@ begin
   begin
     LJSON := Req.Body<TJSONObject>.Clone as TJSONObject;
 
-    Numero1 := StrToFloat(LJSON.GetValue('numero1').ToString);
-    Numero2 := StrToFloat(LJSON.GetValue('numero2').ToString);
+    Numero1 := LJSON.GetValue<Double>('numero1');
+    Numero2 := LJSON.GetValue<Double>('numero2');
 
     LJSON.AddPair('resultado', (Numero1 - Numero2));
 
@@ -81,8 +87,8 @@ begin
   begin
     LJSON := Req.Body<TJSONObject>.Clone as TJSONObject;
 
-    Numero1 := StrToFloat(LJSON.GetValue('numero1').ToString);
-    Numero2 := StrToFloat(LJSON.GetValue('numero2').ToString);
+    Numero1 := LJSON.GetValue<Double>('numero1');
+    Numero2 := LJSON.GetValue<Double>('numero2');
 
     LJSON.AddPair('resultado', (Numero1 / Numero2));
 
@@ -91,6 +97,28 @@ begin
     Writeln('Numero 1: ' + Numero1.ToString);
     Writeln('Numero 2: ' + Numero2.ToString);
     Writeln('Resultado: ' + FloatToStr(Numero1 / Numero2));
+
+    Res.Send<TJSONObject>(LJSON);
+  end);
+
+  App.Post('/multiplicar',
+  procedure (Req: THorseRequest; Res: THorseResponse; Next: TProc)
+  var
+    LJSON: TJSONObject;
+    Numero1, Numero2: Double;
+  begin
+    LJSON := Req.Body<TJSONObject>.Clone as TJSONObject;
+
+    Numero1 := LJSON.GetValue<Double>('numero1');
+    Numero2 := LJSON.GetValue<Double>('numero2');
+
+    LJSON.AddPair('resultado', (Numero1 * Numero2));
+
+    Writeln('-------------------------');
+    Writeln('Operação: Multiplicação');
+    Writeln('Numero 1: ' + Numero1.ToString);
+    Writeln('Numero 2: ' + Numero2.ToString);
+    Writeln('Resultado: ' + FloatToStr(Numero1 * Numero2));
 
     Res.Send<TJSONObject>(LJSON);
   end);
