@@ -1,0 +1,329 @@
+unit Calculadora.View.Principal;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.ExtCtrls,
+  Vcl.Buttons,
+  Vcl.StdCtrls, Calculadora.Interfaces.Controller.Calculadora;
+
+type
+  TFormPrincipal = class(TForm)
+    pnlVisor: TPanel;
+    pnlBotoes: TPanel;
+    Shape1: TShape;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    pnlUm: TPanel;
+    Shape2: TShape;
+    BtnUm: TSpeedButton;
+    pnlTres: TPanel;
+    Shape3: TShape;
+    btnTres: TSpeedButton;
+    pnlDois: TPanel;
+    Shape4: TShape;
+    btnDois: TSpeedButton;
+    pnlSomar: TPanel;
+    Shape5: TShape;
+    btnSomar: TSpeedButton;
+    Panel6: TPanel;
+    Shape6: TShape;
+    btnQuatro: TSpeedButton;
+    Panel7: TPanel;
+    Shape7: TShape;
+    btnSubtrair: TSpeedButton;
+    Panel8: TPanel;
+    Shape8: TShape;
+    btnSeis: TSpeedButton;
+    Panel9: TPanel;
+    Shape9: TShape;
+    btnCinco: TSpeedButton;
+    Panel10: TPanel;
+    Shape10: TShape;
+    btnSete: TSpeedButton;
+    Panel11: TPanel;
+    Shape11: TShape;
+    btnMultiplicacao: TSpeedButton;
+    Panel12: TPanel;
+    Shape12: TShape;
+    btnNove: TSpeedButton;
+    Panel13: TPanel;
+    Shape13: TShape;
+    btnOito: TSpeedButton;
+    Panel14: TPanel;
+    Shape14: TShape;
+    btnVirgula: TSpeedButton;
+    Panel15: TPanel;
+    Shape15: TShape;
+    btnMaisMenos: TSpeedButton;
+    Panel16: TPanel;
+    Shape16: TShape;
+    btnZero: TSpeedButton;
+    Panel17: TPanel;
+    Shape17: TShape;
+    btnIgual: TSpeedButton;
+    Panel19: TPanel;
+    Shape19: TShape;
+    btnDividir: TSpeedButton;
+    Panel20: TPanel;
+    Shape20: TShape;
+    btnLimpar: TSpeedButton;
+    Panel18: TPanel;
+    edtCalculando: TEdit;
+    Panel21: TPanel;
+    edtCalculado: TEdit;
+    procedure FormCreate(Sender: TObject);
+    procedure btnSomarClick(Sender: TObject);
+    procedure btnSubtrairClick(Sender: TObject);
+    procedure btnMultiplicacaoClick(Sender: TObject);
+    procedure btnDividirClick(Sender: TObject);
+    procedure btnIgualClick(Sender: TObject);
+    procedure BtnUmClick(Sender: TObject);
+    procedure btnDoisClick(Sender: TObject);
+    procedure btnTresClick(Sender: TObject);
+    procedure btnQuatroClick(Sender: TObject);
+    procedure btnCincoClick(Sender: TObject);
+    procedure btnSeisClick(Sender: TObject);
+    procedure btnSeteClick(Sender: TObject);
+    procedure btnOitoClick(Sender: TObject);
+    procedure btnNoveClick(Sender: TObject);
+    procedure btnZeroClick(Sender: TObject);
+    procedure btnLimparClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnVirgulaClick(Sender: TObject);
+    procedure btnMaisMenosClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+  private
+    { Private declarations }
+    FController: IControllerCalculadora;
+
+    procedure InserirNumero(Numero: String);
+    procedure InserirOperacao(Operacao: TOperacao);
+    procedure InserirPontuacao(Pontuacao: String);
+  public
+    { Public declarations }
+  end;
+
+var
+  FormPrincipal: TFormPrincipal;
+
+implementation
+
+uses
+  Calculadora.Controller.Calculadora;
+
+{$R *.dfm}
+
+procedure TFormPrincipal.btnDividirClick(Sender: TObject);
+begin
+  InserirOperacao(tpDivisao);
+end;
+
+procedure TFormPrincipal.btnDoisClick(Sender: TObject);
+begin
+  InserirNumero('2');
+end;
+
+procedure TFormPrincipal.btnIgualClick(Sender: TObject);
+begin
+  if (Length(edtCalculando.Text) = 0) and (FController.Numero1 = 0) and (FController.Operador = tpNenhuma) then
+    raise Exception.Create('Informe o primeiro número!');
+
+  if FController.Operador = tpNenhuma then
+    raise Exception.Create('Informe a operação!');
+
+  if (Length(edtCalculando.Text) = 0) and (FController.Numero2 = 0) then
+    raise Exception.Create('Informe o segundo número!');
+
+  if (FController.Operador= tpDivisao) and (edtCalculando.Text = '0') then
+    raise Exception.Create('Impossível realizar divisão por Zero!');
+
+  FController.Numero2(StrToFloat(edtCalculando.Text));
+  edtCalculado.Text := edtCalculado.Text + ' ' + edtCalculando.Text + ' =';
+  edtCalculando.Clear;
+
+  edtCalculando.Text := FController.Calcular.ToString;
+
+  FController.Numero1(0)
+             .Numero2(0)
+             .Operador(tpNenhuma);
+end;
+
+procedure TFormPrincipal.btnLimparClick(Sender: TObject);
+begin
+  FController.Numero1(0)
+             .Numero2(0)
+             .Operador(tpNenhuma);
+
+  edtCalculando.Clear;
+  edtCalculado.Clear;
+end;
+
+procedure TFormPrincipal.btnMaisMenosClick(Sender: TObject);
+var
+  LCalculando: String;
+begin
+  LCalculando := edtCalculando.Text;
+
+  if LCalculando.StartsWith('-') then
+    Delete(LCalculando, 1, 1)
+  else
+    Insert('-', LCalculando, 1);
+
+  edtCalculando.Text := LCalculando;
+end;
+
+procedure TFormPrincipal.btnSubtrairClick(Sender: TObject);
+begin
+  InserirOperacao(tpSubtracao);
+end;
+
+procedure TFormPrincipal.btnMultiplicacaoClick(Sender: TObject);
+begin
+  InserirOperacao(tpMultiplicacao);
+end;
+
+procedure TFormPrincipal.btnSomarClick(Sender: TObject);
+begin
+  InserirOperacao(tpSoma);
+end;
+
+procedure TFormPrincipal.btnTresClick(Sender: TObject);
+begin
+  InserirNumero('3');
+end;
+
+procedure TFormPrincipal.BtnUmClick(Sender: TObject);
+begin
+  InserirNumero('1');
+end;
+
+procedure TFormPrincipal.btnVirgulaClick(Sender: TObject);
+begin
+  InserirPontuacao(',');
+end;
+
+procedure TFormPrincipal.btnZeroClick(Sender: TObject);
+begin
+  InserirNumero('0');
+end;
+
+procedure TFormPrincipal.FormCreate(Sender: TObject);
+begin
+  FController := TControllerCalculadora.New;
+end;
+
+procedure TFormPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  case Key of
+    VK_NUMPAD0: btnZero.Click;
+    VK_NUMPAD1: btnUm.Click;
+    VK_NUMPAD2: btnDois.Click;
+    VK_NUMPAD3: btnTres.Click;
+    VK_NUMPAD4: btnQuatro.Click;
+    VK_NUMPAD5: btnCinco.Click;
+    VK_NUMPAD6: btnSeis.Click;
+    VK_NUMPAD7: btnSete.Click;
+    VK_NUMPAD8: btnOito.Click;
+    VK_NUMPAD9: btnNove.Click;
+    VK_ADD: btnSomar.Click;
+    VK_SUBTRACT: btnSubtrair.Click;
+    VK_MULTIPLY: btnMultiplicacao.Click;
+    VK_DIVIDE: btnDividir.Click;
+    VK_RETURN: btnIgual.Click;
+  end;
+end;
+
+procedure TFormPrincipal.FormShow(Sender: TObject);
+begin
+  edtCalculando.Clear;
+  edtCalculado.Clear;
+end;
+
+procedure TFormPrincipal.InserirNumero(Numero: String);
+begin
+  edtCalculando.Text := edtCalculando.Text + Numero;
+end;
+
+procedure TFormPrincipal.InserirOperacao(Operacao: TOperacao);
+var
+  LOperador, LCalculado: String;
+begin
+  if (FController.Operador = tpNenhuma) and (Length(edtCalculando.Text) = 0) then
+    Exit;
+
+  case Operacao of
+    tpSoma: LOperador := '+';
+    tpSubtracao: LOperador := '-';
+    tpDivisao: LOperador := '/';
+    tpMultiplicacao: LOperador := 'x';
+  end;
+
+  if FController.Operador <> tpNenhuma then
+    begin
+      LCalculado := edtCalculado.Text;
+      Delete(LCalculado, Length(LCalculado), 1);
+      FController.Operador(Operacao);
+      edtCalculado.Text := LCalculado + LOperador;
+
+      Exit;
+    end;
+
+  FController.Operador(Operacao);
+  FController.Numero1(StrToFloat(edtCalculando.Text));
+  edtCalculado.Text := edtCalculando.Text + ' ' + LOperador;
+  edtCalculando.Clear;
+end;
+
+procedure TFormPrincipal.InserirPontuacao(Pontuacao: String);
+begin
+  if Pos(Pontuacao, edtCalculando.Text) > 0 then
+    Exit;
+
+  edtCalculando.Text := edtCalculando.Text + Pontuacao;
+end;
+
+procedure TFormPrincipal.btnQuatroClick(Sender: TObject);
+begin
+  InserirNumero('4');
+end;
+
+procedure TFormPrincipal.btnSeisClick(Sender: TObject);
+begin
+  InserirNumero('6');
+end;
+
+procedure TFormPrincipal.btnCincoClick(Sender: TObject);
+begin
+  InserirNumero('5');
+end;
+
+procedure TFormPrincipal.btnSeteClick(Sender: TObject);
+begin
+  InserirNumero('7');
+end;
+
+procedure TFormPrincipal.btnNoveClick(Sender: TObject);
+begin
+  InserirNumero('9');
+end;
+
+procedure TFormPrincipal.btnOitoClick(Sender: TObject);
+begin
+  InserirNumero('8');
+end;
+
+end.

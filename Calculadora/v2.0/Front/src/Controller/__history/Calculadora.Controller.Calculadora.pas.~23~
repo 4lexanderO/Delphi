@@ -1,0 +1,165 @@
+unit Calculadora.Controller.Calculadora;
+
+interface
+
+uses
+  Calculadora.Interfaces.Controller.Calculadora,
+  Calculadora.Model.Calculadora,
+  REST.Client;
+
+type
+  TControllerCalculadora = class(TInterfacedObject, iControllerCalculadora)
+  private
+    FCalculadora: TCalculadora;
+    FOperador: TOperacao;
+  public
+    function Numero1(Numero: Double): IControllerCalculadora; overload;
+    function Numero1: Double; overload;
+    function Numero2(Numero: Double): IControllerCalculadora; overload;
+    function Numero2: Double; overload;
+
+    function Somar: Double;
+    function Subtrair: Double;
+    function Dividir: Double;
+    function Multiplicar: Double;
+
+    function Operador(Operador: TOperacao): IControllerCalculadora; overload;
+    function Operador: TOperacao; overload;
+    function Calcular: Double;
+
+    constructor Create;
+    destructor Destroy; override;
+
+    class function New: TControllerCalculadora;
+end;
+
+implementation
+
+uses
+  System.SysUtils, JSON, REST.Authenticator.Basic, REST.Types;
+
+{ TControllerCalculadora }
+
+function TControllerCalculadora.Calcular: Double;
+var
+  LAuth: THTTPBasicAuthenticator;
+  LClient: TRESTClient;
+  LRequest: TRESTRequest;
+  LResponse: TRESTResponse;
+  LJSON: TJSONObject;
+begin
+  Result := 0;
+
+  LAuth := THTTPBasicAuthenticator.Create('User','Password');
+  LClient := TRESTClient.Create('http://localhost:9000');
+  LRequest := TRESTRequest.Create(nil);
+  LResponse := TRESTResponse.Create(nil);
+  LJSON := TJSONObject.Create;
+  try
+    LJSON.AddPair('numero1', TJSONNumber.Create(Numero1));
+    LJSON.AddPair('numero2', TJSONNumber.Create(Numero2));
+
+    LClient.Authenticator := LAuth;
+    LRequest.Client := LClient;
+
+    case FOperador of
+      tpSoma: LRequest.Resource := '/somar';
+      tpSubtracao: LRequest.Resource := '/subtrair';
+      tpDivisao: LRequest.Resource := '/dividir';
+      tpMultiplicacao: LRequest.Resource := '/multiplicar';
+    end;
+
+    LRequest.Method := TRESTRequestMethod.rmPOST;
+    LRequest.Response := LResponse;
+    LRequest.AddBody<TJSONObject>(LJSON);
+
+    LRequest.Execute;
+
+    LResponse.ContentType := 'application/json;charset=UTF-8';
+
+    Result := LResponse.JSONValue.GetValue<double>('resultado');
+  finally
+    LAuth.Free;
+    LClient.Free;
+    LRequest.Free;
+    LResponse.Free;
+    FreeAndNil(LJSON);
+  end;
+end;
+
+constructor TControllerCalculadora.Create;
+begin
+  if not Assigned(FCalculadora) then
+    FCalculadora := TCalculadora.New;
+
+  Operador(tpNenhuma);
+end;
+
+destructor TControllerCalculadora.Destroy;
+begin
+  inherited;
+end;
+
+function TControllerCalculadora.Dividir: Double;
+begin
+  Operador(tpDivisao);
+  Result := FCalculadora.Dividir;
+end;
+
+function TControllerCalculadora.Multiplicar: Double;
+begin
+  Operador(tpMultiplicacao);
+  Result := FCalculadora.Multiplicar;
+end;
+
+function TControllerCalculadora.Numero1(Numero: Double): IControllerCalculadora;
+begin
+  FCalculadora.Numero1(Numero);
+  Result := Self;
+end;
+
+class function TControllerCalculadora.New: TControllerCalculadora;
+begin
+  Result := Self.Create;
+end;
+
+function TControllerCalculadora.Numero1: Double;
+begin
+  Result := FCalculadora.Numero1;
+end;
+
+function TControllerCalculadora.Numero2: Double;
+begin
+  Result := FCalculadora.Numero2;
+end;
+
+function TControllerCalculadora.Operador: TOperacao;
+begin
+  Result := FOperador;
+end;
+
+function TControllerCalculadora.Operador(Operador: TOperacao): IControllerCalculadora;
+begin
+  FOperador := Operador;
+  Result := Self;
+end;
+
+function TControllerCalculadora.Numero2(Numero: Double): IControllerCalculadora;
+begin
+  FCalculadora.Numero2(Numero);
+  Result := Self;
+end;
+
+function TControllerCalculadora.Somar: Double;
+begin
+  Operador(tpSoma);
+  Result := FCalculadora.Somar;
+end;
+
+function TControllerCalculadora.Subtrair: Double;
+begin
+  Operador(tpSubtracao);
+  Result := FCalculadora.Subtrair;
+end;
+
+end.

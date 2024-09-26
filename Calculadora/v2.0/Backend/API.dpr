@@ -28,6 +28,12 @@ begin
 
   App.Use(Jhonson);
 
+  App.Get('/ping',
+  procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+  begin
+    Res.Send('pong');
+  end);
+
   App.Post('/somar',
   procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
   var

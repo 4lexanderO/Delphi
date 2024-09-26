@@ -3,7 +3,9 @@ unit Calculadora.Controller.Calculadora;
 interface
 
 uses
-  Calculadora.Interfaces.Controller.Calculadora, Calculadora.Model.Calculadora;
+  Calculadora.Interfaces.Controller.Calculadora,
+  Calculadora.Model.Calculadora,
+  REST.Client;
 
 type
   TControllerCalculadora = class(TInterfacedObject, iControllerCalculadora)
@@ -33,17 +35,56 @@ end;
 
 implementation
 
+uses
+  System.SysUtils, JSON, REST.Authenticator.Basic, REST.Types;
+
 { TControllerCalculadora }
 
 function TControllerCalculadora.Calcular: Double;
+var
+  LAuth: THTTPBasicAuthenticator;
+  LClient: TRESTClient;
+  LRequest: TRESTRequest;
+  LResponse: TRESTResponse;
+  LJSON: TJSONObject;
 begin
   Result := 0;
 
-  case FOperador of
-    tpSoma: Result := Numero1 + Numero2;
-    tpSubtracao: Result := Numero1 - Numero2;
-    tpDivisao: Result := Numero1 / Numero2;
-    tpMultiplicacao: Result := Numero1 * Numero2;
+  LAuth := THTTPBasicAuthenticator.Create('User','Password');
+  LClient := TRESTClient.Create('http://localhost:9000');
+  LRequest := TRESTRequest.Create(nil);
+  LResponse := TRESTResponse.Create(nil);
+  LJSON := TJSONObject.Create;
+  try
+    LJSON.AddPair('numero1', Numero1);
+    LJSON.AddPair('numero2', Numero2);
+
+    LClient.Authenticator := LAuth;
+    LRequest.Client := LClient;
+
+    case FOperador of
+      tpSoma: LRequest.Resource := '/somar';
+      tpSubtracao: LRequest.Resource := '/subtrair';
+      tpDivisao: LRequest.Resource := '/dividir';
+      tpMultiplicacao: LRequest.Resource := '/multiplicar';
+    end;
+
+    LRequest.Method := TRESTRequestMethod.rmPOST;
+    LRequest.Response := LResponse;
+
+    LRequest.ContentType.ctAPPLICATION_JSON;
+    LRequest.Body.Add(LJSON);
+
+    LRequest.Execute;
+
+    LResponse.ContentType := 'application/json;charset=UTF-8';
+
+    Result := LResponse.JSONValue.GetValue<double>('resultado');
+  finally
+    LAuth.Free;
+    LClient.Free;
+    LRequest.Free;
+    LResponse.Free;
   end;
 end;
 
