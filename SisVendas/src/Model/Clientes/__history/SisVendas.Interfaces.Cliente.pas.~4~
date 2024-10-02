@@ -10,8 +10,7 @@ unit SisVendas.Interfaces.Cliente;
 interface
 
 uses
-  System.Classes,
-  System.Generics.Collections;
+  System.Classes;
 
 type
   ICliente = interface

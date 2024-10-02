@@ -3,26 +3,28 @@
 	<Transactions>
     <Transaction>2024/09/19 11:29:37.000.994,=D:\Sistemas\Unit1.pas</Transaction>
     <Transaction>2024/09/20 10:01:11.000.006,=D:\Sistemas\Unit1.pas</Transaction>
-    <Transaction>2024/09/20 10:02:04.000.684,C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\View\SisVendas.View.Principal.pas=D:\Sistemas\Unit1.pas</Transaction>
-    <Transaction>2024/09/20 10:02:04.000.684,C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\View\SisVendas.View.Principal.dfm=D:\Sistemas\Unit1.dfm</Transaction>
-    <Transaction>2024/09/20 10:02:11.000.325,C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\SisVendas.dproj=D:\Sistemas\Project1.dproj</Transaction>
+    <Transaction>2024/09/20 10:02:04.000.684,D:\Sistemas\Unit1.dfm=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\View\SisVendas.View.Principal.dfm</Transaction>
+    <Transaction>2024/09/20 10:02:04.000.684,D:\Sistemas\Unit1.pas=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\View\SisVendas.View.Principal.pas</Transaction>
+    <Transaction>2024/09/20 10:02:11.000.325,D:\Sistemas\Project1.dproj=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\SisVendas.dproj</Transaction>
     <Transaction>2024/09/20 10:02:16.000.485,=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas</Transaction>
-    <Transaction>2024/09/20 10:02:47.000.216,C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Cadastros\Clientes\SisVendas.Model.Cliente.pas=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas</Transaction>
+    <Transaction>2024/09/20 10:02:47.000.216,C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Cadastros\Clientes\SisVendas.Model.Cliente.pas</Transaction>
     <Transaction>2024/09/20 10:02:54.000.106,=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas</Transaction>
-    <Transaction>2024/09/20 10:03:11.000.398,C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Cadastros\Clientes\SisVendas.Interfaces.Cliente.pas=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas</Transaction>
+    <Transaction>2024/09/20 10:03:11.000.398,C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Cadastros\Clientes\SisVendas.Interfaces.Cliente.pas</Transaction>
     <Transaction>2024/09/20 11:57:56.000.692,=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Clientes\SisVendas.Interfaces.Cliente.pas</Transaction>
     <Transaction>2024/09/20 11:58:04.000.709,=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Clientes\SisVendas.Model.Cliente.pas</Transaction>
     <Transaction>2024/09/20 11:58:14.000.309,=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas</Transaction>
-    <Transaction>2024/09/20 11:58:31.000.960,C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Clientes\SisVendas.Factory.Model.Cliente.pas</Transaction>
+    <Transaction>2024/09/20 11:58:31.000.960,C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Clientes\SisVendas.Factory.Model.Cliente.pas=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas</Transaction>
     <Transaction>2024/09/20 11:58:38.000.396,=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas</Transaction>
-    <Transaction>2024/09/20 11:58:54.000.050,C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Clientes\SisVendas.Interfaces.Factory.Model.Cliente.pas</Transaction>
-    <Transaction>2024/09/22 20:13:36.019,=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Unit2.pas</Transaction>
-    <Transaction>2024/09/22 20:14:03.498,C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Model\Sistema\SisVenda.Model.Sistema.Mensagens.dfm=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Unit2.dfm</Transaction>
-    <Transaction>2024/09/22 20:14:03.498,C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Model\Sistema\SisVenda.Model.Sistema.Mensagens.pas=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Unit2.pas</Transaction>
-    <Transaction>2024/09/23 10:45:25.440,=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Model\Sistema\Mensagens\SisVenda.Model.Sistema.Mensagens.pas</Transaction>
-    <Transaction>2024/09/23 10:57:58.118,=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Unit1.pas</Transaction>
-    <Transaction>2024/09/23 10:58:16.209,C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Model\Sistema\Mensagens\SisVendas.Model.Sistema.Mensagens.pas=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Unit1.pas</Transaction>
-    <Transaction>2024/09/23 10:58:24.503,=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Unit1.pas</Transaction>
-    <Transaction>2024/09/23 10:58:49.212,C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Model\Sistema\Mensagens\SisVendas.Interfaces.Model.Sistema.Mensagens.pas=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Unit1.pas</Transaction>
+    <Transaction>2024/09/20 11:58:54.000.050,C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Model\Clientes\SisVendas.Interfaces.Factory.Model.Cliente.pas=C:\Users\Usuario\Desktop\Projetos\Delphi\SisVendas\src\Unit1.pas</Transaction>
+    <Transaction>2024/09/22 20:13:36.000.019,=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Unit2.pas</Transaction>
+    <Transaction>2024/09/22 20:14:03.000.498,C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Unit2.pas=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Model\Sistema\SisVenda.Model.Sistema.Mensagens.pas</Transaction>
+    <Transaction>2024/09/22 20:14:03.000.498,C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Unit2.dfm=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Model\Sistema\SisVenda.Model.Sistema.Mensagens.dfm</Transaction>
+    <Transaction>2024/09/23 10:45:25.000.440,=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Model\Sistema\Mensagens\SisVenda.Model.Sistema.Mensagens.pas</Transaction>
+    <Transaction>2024/09/23 10:57:58.000.118,=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Unit1.pas</Transaction>
+    <Transaction>2024/09/23 10:58:16.000.209,C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Unit1.pas=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Model\Sistema\Mensagens\SisVendas.Model.Sistema.Mensagens.pas</Transaction>
+    <Transaction>2024/09/23 10:58:24.000.503,=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Unit1.pas</Transaction>
+    <Transaction>2024/09/23 10:58:49.000.212,C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Unit1.pas=C:\Users\marzi\Documents\Development\_Git\Delphi\SisVendas\src\Model\Sistema\Mensagens\SisVendas.Interfaces.Model.Sistema.Mensagens.pas</Transaction>
+    <Transaction>2024/10/02 17:16:24.286,=C:\Users\Usuario\Documents\Development\Delphi\Delphi\SisVendas\src\Unit1.pas</Transaction>
+    <Transaction>2024/10/02 17:16:42.096,C:\Users\Usuario\Documents\Development\Delphi\Delphi\SisVendas\src\Model\Clientes\SisVendas.Model.DAO.Cliente.pas=C:\Users\Usuario\Documents\Development\Delphi\Delphi\SisVendas\src\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

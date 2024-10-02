@@ -9,8 +9,7 @@ uses
   SisVendas.Interfaces.Factory.Model.Cliente in 'Model\Clientes\SisVendas.Interfaces.Factory.Model.Cliente.pas',
   SisVenda.Model.Sistema.Mensagens in 'Model\Sistema\Mensagens\SisVenda.Model.Sistema.Mensagens.pas' {Form_Sistema_Mensagens},
   SisVendas.Model.Sistema.Mensagens in 'Model\Sistema\Mensagens\SisVendas.Model.Sistema.Mensagens.pas',
-  SisVendas.Interfaces.Model.Sistema.Mensagens in 'Model\Sistema\Mensagens\SisVendas.Interfaces.Model.Sistema.Mensagens.pas',
-  SisVendas.Model.DAO.Cliente in 'Model\Clientes\SisVendas.Model.DAO.Cliente.pas';
+  SisVendas.Interfaces.Model.Sistema.Mensagens in 'Model\Sistema\Mensagens\SisVendas.Interfaces.Model.Sistema.Mensagens.pas';
 
 {$R *.res}
 

@@ -1,0 +1,7 @@
+unit SisVendas.Model.DAO.Cliente;
+
+interface
+
+implementation
+
+end.
