@@ -17,7 +17,9 @@ type
       destructor Destroy; override;
     public
       class function New: IDAOCliente;
-      function Salvar(Clientes: TList<ICliente>): IDAOCliente;
+
+      function Add(Cliente: ICliente): IDAOCliente;
+      function Salvar: IDAOCliente;
   end;
 
 implementation
@@ -25,6 +27,12 @@ implementation
 { TDAOCliente }
 
 {$REGION 'Construtores / Destrutores'}
+
+function TDAOCliente.Add(Cliente: ICliente): IDAOCliente;
+begin
+  FClientes.Add(Cliente);
+  Result := Self;
+end;
 
 constructor TDAOCliente.Create;
 begin
@@ -44,19 +52,22 @@ end;
 
 {$ENDREGION}
 
-function TDAOCliente.Salvar(Clientes: TList<ICliente>): IDAOCliente;
+function TDAOCliente.Salvar: IDAOCliente;
 var
   LArquivo: TStringList;
 begin
+  if Assigned(FClientes) then
+    if FClientes.Count <= 0 then
+      raise Exception.Create('Adicione um cliente para salvar!');
+
   LArquivo := TStringList.Create;
   try
     LArquivo.Add('--------------------');
-    LArquivo.Add('Bem-vindo(a) ao SisVendas!');
+    LArquivo.Add('Cadastro de Clientes!');
     LArquivo.Add('--------------------');
 
-    for var i: integer := 0 to FClientes.Count - 1 do
+    for var i: integer := 0 to FClientes.Count -1 do
     begin
-      LArquivo.Add('--------------------');
       LArquivo.Add('Código:' + FClientes[i].Codigo.ToString);
       LArquivo.Add('Cliente:' + FClientes[i].Nome);
       LArquivo.Add('Idade:' + FClientes[i].Idade.ToString);
@@ -67,6 +78,8 @@ begin
   finally
     FreeAndNil(LArquivo);
   end;
+
+  Result := Self;
 end;
 
 end.

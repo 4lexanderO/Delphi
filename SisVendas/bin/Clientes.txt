@@ -1,0 +1,15 @@
+--------------------
+Cadastro de Clientes!
+--------------------
+Código:123
+Cliente:Cliente A
+Idade:27
+--------------------
+Código:456
+Cliente:Cliente B
+Idade:26
+--------------------
+Código:789
+Cliente:Cliente C
+Idade:25
+--------------------

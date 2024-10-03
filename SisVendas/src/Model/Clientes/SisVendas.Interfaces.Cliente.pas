@@ -29,7 +29,8 @@ type
   IDAOCliente = interface
     ['{ECFFD32B-085A-4F3E-901A-C274067BF76C}']
 
-    function Salvar(Clientes: TList<ICliente>): IDAOCliente;
+    function Add(Cliente: ICliente): IDAOCliente;
+    function Salvar: IDAOCliente;
   end;
 
 
