@@ -10,9 +10,8 @@ object Form_Principal: TForm_Principal
   Font.Height = -13
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = True
+  OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 16
   object PgcPrincipal: TPageControl
     Left = 0
@@ -22,6 +21,8 @@ object Form_Principal: TForm_Principal
     ActivePage = TsCliente
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 585
+    ExplicitHeight = 533
     object TsPrincipal: TTabSheet
       Caption = 'Principal'
       object Button1: TButton
@@ -37,18 +38,16 @@ object Form_Principal: TForm_Principal
     object TsCliente: TTabSheet
       Caption = 'Cliente'
       ImageIndex = 1
-      object PnlCadastroCliente: TPanel
+      object PnlClienteDados: TPanel
         Left = 0
         Top = 0
         Width = 579
         Height = 89
         Align = alTop
         BevelOuter = bvNone
-        Enabled = False
         ShowCaption = False
         TabOrder = 0
-        ExplicitLeft = 5
-        ExplicitTop = 3
+        ExplicitWidth = 577
         object Label2: TLabel
           Left = 95
           Top = 16
@@ -84,6 +83,7 @@ object Form_Principal: TForm_Principal
           Top = 38
           Width = 343
           Height = 24
+          Enabled = False
           TabOrder = 1
         end
         object EdtClienteAnoNascimento: TEdit
@@ -91,10 +91,11 @@ object Form_Principal: TForm_Principal
           Top = 38
           Width = 131
           Height = 24
+          Enabled = False
           TabOrder = 2
         end
       end
-      object Panel1: TPanel
+      object PnlClienteBotoes: TPanel
         Left = 0
         Top = 89
         Width = 579
@@ -107,7 +108,8 @@ object Form_Principal: TForm_Principal
         Padding.Bottom = 4
         ShowCaption = False
         TabOrder = 1
-        object SpeedButton1: TSpeedButton
+        ExplicitWidth = 577
+        object BtnClienteSalvar: TSpeedButton
           AlignWithMargins = True
           Left = 129
           Top = 4
@@ -119,22 +121,25 @@ object Form_Principal: TForm_Principal
           Margins.Bottom = 0
           Align = alLeft
           Caption = 'Salvar'
+          Enabled = False
+          OnClick = BtnClienteSalvarClick
           ExplicitLeft = 131
           ExplicitTop = 6
           ExplicitHeight = 40
         end
-        object SpeedButton2: TSpeedButton
+        object BtnClienteAlterar: TSpeedButton
           Left = 4
           Top = 4
           Width = 120
           Height = 42
           Align = alLeft
           Caption = 'Alterar'
+          OnClick = BtnClienteAlterarClick
           ExplicitLeft = -31
           ExplicitTop = 6
           ExplicitHeight = 40
         end
-        object SpeedButton3: TSpeedButton
+        object BtnClienteCancelar: TSpeedButton
           AlignWithMargins = True
           Left = 254
           Top = 4
@@ -146,6 +151,8 @@ object Form_Principal: TForm_Principal
           Margins.Bottom = 0
           Align = alLeft
           Caption = 'Cancelar'
+          Enabled = False
+          OnClick = BtnClienteCancelarClick
           ExplicitLeft = 318
           ExplicitTop = 6
           ExplicitHeight = 40

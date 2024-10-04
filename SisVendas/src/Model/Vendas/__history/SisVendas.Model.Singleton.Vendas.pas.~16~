@@ -15,12 +15,14 @@ type
 
       constructor Create;
       destructor Destroy; override;
+
+      procedure SetCliente (Cliente: ICliente); overload;
+      function GetCliente: ICliente; overload;
     public
       class function New: TVendas;
       class function NewInstance: TObject; override;
+      property Cliente: ICliente read GetCliente write SetCliente;
 
-      function Cliente(Cliente: ICliente): TVendas; overload;
-      function Cliente: ICliente; overload;
   end;
 
 
@@ -57,15 +59,14 @@ end;
 
 {$ENDREGION}
 
-function TVendas.Cliente: ICliente;
+procedure TVendas.SetCliente(Cliente: ICliente);
 begin
-  Result := FClientes[1];
+  Self.FClientes.Add(Cliente);
 end;
 
-function TVendas.Cliente(Cliente: ICliente): TVendas;
+function TVendas.GetCliente: ICliente;
 begin
-  FClientes.Add(Cliente);
-  Result := Self.New;
+  Result := FClientes[FClientes.Count];
 end;
 
 end.

@@ -46,6 +46,7 @@ type
     BtnClienteAlterar: TSpeedButton;
     BtnClienteCancelar: TSpeedButton;
     procedure FormShow(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
     procedure BtnClienteAlterarClick(Sender: TObject);
     procedure BtnClienteSalvarClick(Sender: TObject);
     procedure BtnClienteCancelarClick(Sender: TObject);

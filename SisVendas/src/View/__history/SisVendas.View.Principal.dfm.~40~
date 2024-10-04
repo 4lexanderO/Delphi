@@ -10,9 +10,7 @@ object Form_Principal: TForm_Principal
   Font.Height = -13
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = True
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 16
   object PgcPrincipal: TPageControl
     Left = 0
@@ -22,56 +20,49 @@ object Form_Principal: TForm_Principal
     ActivePage = TsCliente
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 585
+    ExplicitHeight = 533
     object TsPrincipal: TTabSheet
       Caption = 'Principal'
-      object Button1: TButton
-        Left = 416
-        Top = 152
-        Width = 75
-        Height = 25
-        Caption = 'Button1'
-        TabOrder = 0
-        OnClick = Button1Click
-      end
     end
     object TsCliente: TTabSheet
       Caption = 'Cliente'
       ImageIndex = 1
-      object PnlCadastroCliente: TPanel
+      object PnlClienteDados: TPanel
         Left = 0
         Top = 0
         Width = 579
         Height = 89
         Align = alTop
         BevelOuter = bvNone
-        Enabled = False
+        Color = clWhite
+        ParentBackground = False
         ShowCaption = False
         TabOrder = 0
-        ExplicitLeft = 5
-        ExplicitTop = 3
-        object Label2: TLabel
-          Left = 95
+        ExplicitWidth = 577
+        object lblClienteNome: TLabel
+          Left = 103
           Top = 16
           Width = 38
           Height = 16
           Caption = 'Nome:'
         end
-        object Label1: TLabel
-          Left = 4
+        object lblClienteCodigo: TLabel
+          Left = 12
           Top = 16
           Width = 44
           Height = 16
           Caption = 'C'#243'digo:'
         end
-        object Label3: TLabel
-          Left = 444
+        object lblClienteAnoNascimento: TLabel
+          Left = 436
           Top = 16
           Width = 115
           Height = 16
           Caption = 'Ano de Nascimento:'
         end
         object EdtClienteCodigo: TEdit
-          Left = 4
+          Left = 12
           Top = 38
           Width = 85
           Height = 24
@@ -80,34 +71,40 @@ object Form_Principal: TForm_Principal
           TabOrder = 0
         end
         object EdtClienteNome: TEdit
-          Left = 95
+          Left = 103
           Top = 38
-          Width = 343
+          Width = 327
           Height = 24
+          Enabled = False
           TabOrder = 1
         end
         object EdtClienteAnoNascimento: TEdit
-          Left = 444
+          Left = 436
           Top = 38
           Width = 131
           Height = 24
+          Enabled = False
           TabOrder = 2
         end
       end
-      object Panel1: TPanel
+      object PnlClienteBotoes: TPanel
         Left = 0
-        Top = 89
+        Top = 460
         Width = 579
         Height = 50
-        Align = alTop
+        Align = alBottom
         BevelOuter = bvNone
+        Color = clWhite
         Padding.Left = 4
         Padding.Top = 4
         Padding.Right = 4
         Padding.Bottom = 4
+        ParentBackground = False
         ShowCaption = False
         TabOrder = 1
-        object SpeedButton1: TSpeedButton
+        ExplicitTop = 89
+        ExplicitWidth = 577
+        object BtnClienteSalvar: TSpeedButton
           AlignWithMargins = True
           Left = 129
           Top = 4
@@ -120,22 +117,24 @@ object Form_Principal: TForm_Principal
           Align = alLeft
           Caption = 'Salvar'
           Enabled = False
+          OnClick = BtnClienteSalvarClick
           ExplicitLeft = 131
           ExplicitTop = 6
           ExplicitHeight = 40
         end
-        object SpeedButton2: TSpeedButton
+        object BtnClienteAlterar: TSpeedButton
           Left = 4
           Top = 4
           Width = 120
           Height = 42
           Align = alLeft
           Caption = 'Alterar'
+          OnClick = BtnClienteAlterarClick
           ExplicitLeft = -31
           ExplicitTop = 6
           ExplicitHeight = 40
         end
-        object SpeedButton3: TSpeedButton
+        object BtnClienteCancelar: TSpeedButton
           AlignWithMargins = True
           Left = 254
           Top = 4
@@ -148,6 +147,7 @@ object Form_Principal: TForm_Principal
           Align = alLeft
           Caption = 'Cancelar'
           Enabled = False
+          OnClick = BtnClienteCancelarClick
           ExplicitLeft = 318
           ExplicitTop = 6
           ExplicitHeight = 40

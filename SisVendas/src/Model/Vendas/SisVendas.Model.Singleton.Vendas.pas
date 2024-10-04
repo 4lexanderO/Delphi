@@ -11,7 +11,7 @@ type
   TVendas = class
     private
       class var FInstance: TVendas;
-      FClientes: TList<ICliente>;
+      FCliente: ICliente;
 
       constructor Create;
       destructor Destroy; override;
@@ -34,14 +34,11 @@ implementation
 
 constructor TVendas.Create;
 begin
-  FClientes := TList<ICliente>.Create;
 end;
 
 destructor TVendas.Destroy;
 begin
   inherited;
-
-  FreeAndNil(FClientes);
 end;
 
 class function TVendas.New: TVendas;
@@ -61,12 +58,12 @@ end;
 
 procedure TVendas.SetCliente(Cliente: ICliente);
 begin
-  Self.FClientes.Add(Cliente);
+  FCliente := Cliente;
 end;
 
 function TVendas.GetCliente: ICliente;
 begin
-  Result := FClientes[FClientes.Count];
+  Result := FCliente;
 end;
 
 end.

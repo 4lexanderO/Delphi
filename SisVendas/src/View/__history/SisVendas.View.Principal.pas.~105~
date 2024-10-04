@@ -22,7 +22,10 @@ uses
   Vcl.Buttons,
   Vcl.ComCtrls,
   Vcl.StdCtrls,
-  System.Generics.Collections, Vcl.ExtCtrls, SisVendas.Model.Singleton.Vendas;
+  System.Generics.Collections,
+  Vcl.ExtCtrls,
+  AnsiStrings,
+  SisVendas.Model.Singleton.Vendas;
 
 type
   TForm_Principal = class(TForm)
@@ -31,13 +34,12 @@ type
     TsCliente: TTabSheet;
     TsProduto: TTabSheet;
     TsVenda: TTabSheet;
-    Button1: TButton;
-    Label1: TLabel;
+    lblClienteCodigo: TLabel;
     EdtClienteCodigo: TEdit;
-    Label2: TLabel;
+    lblClienteNome: TLabel;
     EdtClienteNome: TEdit;
     EdtClienteAnoNascimento: TEdit;
-    Label3: TLabel;
+    lblClienteAnoNascimento: TLabel;
     PnlClienteDados: TPanel;
     PnlClienteBotoes: TPanel;
     BtnClienteSalvar: TSpeedButton;
@@ -48,10 +50,12 @@ type
     procedure BtnClienteAlterarClick(Sender: TObject);
     procedure BtnClienteSalvarClick(Sender: TObject);
     procedure BtnClienteCancelarClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
+    procedure EdtClienteNomeEnter(Sender: TObject);
   private
     { Private declarations }
     procedure AlterarDadosCliente(Alterar: Boolean);
+    procedure ClearFocusLabels;
+    procedure SetFocusLabels(Obj: TObject);
   public
     { Public declarations }
     LVendas : TVendas;
@@ -88,18 +92,17 @@ end;
 
 procedure TForm_Principal.BtnClienteSalvarClick(Sender: TObject);
 begin
-
-  LVendas.Cliente(TFactoryCliente.New.Cliente
-                                 .Codigo(1)
-                                 .Nome(EdtClienteNome.Text)
-                                 .AnoNascimento(StrToInt(EdtClienteAnoNascimento.Text)));
+  TVendas.New.Cliente := TFactoryCliente.New.Cliente
+                                            .Codigo(1)
+                                            .Nome(EdtClienteNome.Text)
+                                            .AnoNascimento(StrToInt(EdtClienteAnoNascimento.Text));
 
   ShowMessage(LVendas.New.Cliente.Nome);
+
   AlterarDadosCliente(False);
 end;
 
 {$ENDREGION}
-
 
 
 procedure TForm_Principal.Button1Click(Sender: TObject);
@@ -120,16 +123,29 @@ begin
              .Salvar;
 end;
 
+procedure TForm_Principal.ClearFocusLabels;
+begin
+  for var i: integer := 0 to Self.ComponentCount -1 do
+    if Self.Components[i].ClassType = TLabel then
+    begin
+      TLabel(Self.Components[i]).Font.Color := clBlack;
+      TLabel(Self.Components[i]).Font.Style := [];
+    end;
+end;
+
+procedure TForm_Principal.EdtClienteNomeEnter(Sender: TObject);
+begin
+   OnFocusCliente(Sender);
+end;
+
 procedure TForm_Principal.AlterarDadosCliente(Alterar: Boolean);
 begin
   BtnClienteAlterar.Enabled := not Alterar;
   BtnClienteSalvar.Enabled := Alterar;
   BtnClienteCancelar.Enabled := Alterar;
-end;
 
-procedure TForm_Principal.FormCreate(Sender: TObject);
-begin
-  LVendas := TVendas.New;
+  EdtClienteNome.Enabled := Alterar;
+  EdtClienteAnoNascimento.Enabled := Alterar;
 end;
 
 procedure TForm_Principal.FormShow(Sender: TObject);
@@ -137,6 +153,24 @@ begin
   PgcPrincipal.ActivePageIndex := 0;
 
   TMensagem.New.Mensagem(tmCustom, 'Bem-vindo(a) ao SisVendas!', 'Este sistema está sendo desenvolvido como portfólio de Alexander Oliveira!');
+end;
+
+procedure TForm_Principal.SetFocusLabels(Obj: TObject);
+begin
+  if Obj.ClassName = 'TEdit' then
+  begin
+    case AnsiIndexStr(TEdit(Obj).Name, ['EdtClienteNome', 'EdtClienteAnoNascimento']) of
+      0: begin
+            lblClienteNome.Font.Color := clHighlight;
+            lblClienteNome.Font.Style := [fsBold];
+         end;
+      1: begin
+           lblClienteAnoNascimento.Font.Color := clHighlight;
+           lblClienteAnoNascimento.Font.Style := [fsbold];
+         end;
+    end;
+
+  end;
 end;
 
 end.

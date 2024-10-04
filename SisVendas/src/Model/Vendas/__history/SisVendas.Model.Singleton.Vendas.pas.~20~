@@ -11,16 +11,18 @@ type
   TVendas = class
     private
       class var FInstance: TVendas;
-      FClientes: TList<ICliente>;
+      FCliente: ICliente;
 
       constructor Create;
       destructor Destroy; override;
+
+      procedure SetCliente (Cliente: ICliente); overload;
+      function GetCliente: ICliente; overload;
     public
       class function New: TVendas;
       class function NewInstance: TObject; override;
+      property Cliente: ICliente read GetCliente write SetCliente;
 
-      function Cliente(Cliente: ICliente): TVendas; overload;
-      function Cliente: ICliente; overload;
   end;
 
 
@@ -32,14 +34,11 @@ implementation
 
 constructor TVendas.Create;
 begin
-  FClientes := TList<ICliente>.Create;
 end;
 
 destructor TVendas.Destroy;
 begin
   inherited;
-
-  FreeAndNil(FClientes);
 end;
 
 class function TVendas.New: TVendas;
@@ -57,15 +56,14 @@ end;
 
 {$ENDREGION}
 
-function TVendas.Cliente: ICliente;
+procedure TVendas.SetCliente(Cliente: ICliente);
 begin
-  Result := FClientes[0];
+  Self.FClientes.Add(Cliente);
 end;
 
-function TVendas.Cliente(Cliente: ICliente): TVendas;
+function TVendas.GetCliente: ICliente;
 begin
-  FClientes.Add(Cliente);
-  Result := Self.New;
+  Result := FClientes[FClientes.Count -1];
 end;
 
 end.

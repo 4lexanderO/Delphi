@@ -1,4 +1,4 @@
-unit SisVendas.Model.DAO.Cliente;
+﻿unit SisVendas.Model.DAO.Cliente;
 
 interface
 
@@ -63,14 +63,14 @@ begin
   LArquivo := TStringList.Create;
   try
     LArquivo.Add('--------------------');
-    LArquivo.Add('Cadastro de Clientes!');
+    LArquivo.Add('Cadastro de Clientes');
     LArquivo.Add('--------------------');
 
     for var i: integer := 0 to FClientes.Count -1 do
     begin
-      LArquivo.Add('C�digo:' + FClientes[i].Codigo.ToString);
-      LArquivo.Add('Cliente:' + FClientes[i].Nome);
-      LArquivo.Add('Idade:' + FClientes[i].Idade.ToString);
+      LArquivo.Add('Código.: ' + FClientes[i].Codigo.ToString);
+      LArquivo.Add('Cliente: ' + FClientes[i].Nome);
+      LArquivo.Add('Idade..: ' + FClientes[i].Idade.ToString);
       LArquivo.Add('--------------------');
     end;
 
