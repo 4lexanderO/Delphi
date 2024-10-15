@@ -1,0 +1,15 @@
+program Agenda;
+
+uses
+  Vcl.Forms,
+  Agenda.View.Principal in 'View\Agenda.View.Principal.pas' {Form_Principal},
+  Agenda.Model.Agenda in 'Model\Agenda\Agenda.Model.Agenda.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm_Principal, Form_Principal);
+  Application.Run;
+end.
