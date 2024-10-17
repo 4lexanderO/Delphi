@@ -26,7 +26,6 @@ object Form_Cadastro_Compromisso: TForm_Cadastro_Compromisso
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 482
     object PnlBotoes: TPanel
       Left = 0
       Top = 438
@@ -35,7 +34,6 @@ object Form_Cadastro_Compromisso: TForm_Cadastro_Compromisso
       Align = alBottom
       ShowCaption = False
       TabOrder = 0
-      ExplicitWidth = 482
       object BtnSalvar: TSpeedButton
         Left = 1
         Top = 1
@@ -65,7 +63,6 @@ object Form_Cadastro_Compromisso: TForm_Cadastro_Compromisso
       Align = alClient
       ShowCaption = False
       TabOrder = 1
-      ExplicitWidth = 482
       object Label1: TLabel
         Left = 26
         Top = 16

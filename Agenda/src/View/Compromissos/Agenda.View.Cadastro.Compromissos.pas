@@ -3,9 +3,22 @@ unit Agenda.View.Cadastro.Compromissos;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls,
-  Vcl.Buttons;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.ExtCtrls,
+  Vcl.StdCtrls,
+  Vcl.ComCtrls,
+  Vcl.Buttons,
+  System.DateUtils,
+  Agenda.Interfaces.Agenda,
+  Agenda.Interfaces.Compromissos;
 
 type
   TForm_Cadastro_Compromisso = class(TForm)
@@ -35,9 +48,11 @@ type
     procedure DateFinalizacaoExit(Sender: TObject);
   private
     { Private declarations }
+    FCompromisso: ICompromisso;
   public
     { Public declarations }
-    procedure AdicionarCompromisso;
+    procedure AdicionarCompromisso(Codigo: integer);
+    procedure AlterarCompromisso(const Compromisso: ICompromisso);
   end;
 
 var
@@ -47,9 +62,31 @@ implementation
 
 {$R *.dfm}
 
-procedure TForm_Cadastro_Compromisso.AdicionarCompromisso;
+procedure TForm_Cadastro_Compromisso.AdicionarCompromisso(Codigo: integer);
 begin
+  EdtCodigo.Text := Codigo.ToString;
   Self.Caption := 'Adicionar Compromisso';
+
+  DateInicio.Date := Now;
+  TimeInicio.Time := Now;
+  DateFinalizacao.Date := Now;
+  TimeFim.Time := IncHour(Now, 1);
+
+  Self.ShowModal;
+end;
+
+procedure TForm_Cadastro_Compromisso.AlterarCompromisso(const Compromisso: ICompromisso);
+begin
+  FCompromisso := Compromisso;
+
+  EdtCodigo.Text := FCompromisso.Codigo.ToString;
+  DateInicio.Date := FCompromisso.DataInicio;
+  TimeInicio.Time := FCompromisso.HoraInicio;
+  DateFinalizacao.Date := FCompromisso.DataFim;
+  TimeFim.Time := FCompromisso.HoraFim;
+  EdtAssunto.Text := FCompromisso.Assunto;
+  MemoDescricao.Text := FCompromisso.Descricao;
+
   Self.ShowModal;
 end;
 

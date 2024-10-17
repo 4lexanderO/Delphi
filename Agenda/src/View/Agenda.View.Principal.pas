@@ -17,7 +17,9 @@ uses
   Vcl.DBCGrids,
   Data.DB,
   FireDAC.Comp.Client,
-  Agenda.Interfaces.Agenda, Vcl.StdCtrls, Vcl.DBCtrls;
+  Agenda.Interfaces.Agenda,
+  Vcl.StdCtrls,
+  Vcl.DBCtrls;
 
 type
   TForm_Principal = class(TForm)
@@ -26,10 +28,10 @@ type
     PnlDados: TPanel;
     PnlBotoes: TPanel;
     PnlLblOpcoes: TPanel;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    SpeedButton4: TSpeedButton;
+    BtnAdicionar: TSpeedButton;
+    BtnAlterar: TSpeedButton;
+    BtnExcluir: TSpeedButton;
+    BtnPesquisar: TSpeedButton;
     DbgCompromissos: TDBCtrlGrid;
     lblCodigo: TDBText;
     lblDataInicio: TDBText;
@@ -43,7 +45,8 @@ type
     MemoDescricao: TDBMemo;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure SpeedButton1Click(Sender: TObject);
+    procedure BtnAdicionarClick(Sender: TObject);
+    procedure BtnAlterarClick(Sender: TObject);
   private
     { Private declarations }
     FDataSource: TDataSource;
@@ -137,12 +140,11 @@ begin
   ConfigurarExibicao;
 end;
 
-procedure TForm_Principal.SpeedButton1Click(Sender: TObject);
+procedure TForm_Principal.BtnAdicionarClick(Sender: TObject);
 begin
    Application.CreateForm(TForm_Cadastro_Compromisso, Form_Cadastro_Compromisso);
    try
-     Form_Cadastro_Compromisso.EdtCodigo.Text := (FAgenda.Compromissos.Count + 1).ToString;
-     Form_Cadastro_Compromisso.AdicionarCompromisso;
+     Form_Cadastro_Compromisso.AdicionarCompromisso(FAgenda.Compromissos.Count + 1);
 
      if Form_Cadastro_Compromisso.ModalResult = mrOk then
      begin
@@ -159,6 +161,38 @@ begin
    end;
 
   AtualizarGrid;
+end;
+
+procedure TForm_Principal.BtnAlterarClick(Sender: TObject);
+var
+  LInputCompromisso: string;
+  LCodCompromisso: integer;
+
+begin
+   InputQuery('Informe o código do compromisso a ser alterado','Alteração de valor', LInputCompromisso);
+   LCodCompromisso := StrToIntDef(LInputCompromisso, 0);
+
+   if (LCodCompromisso <= 0) or (not FAgenda.PesquisarCompromisso(LCodCompromisso)) then
+     raise Exception.Create('Compromisso não encontrado!');
+
+   Application.CreateForm(TForm_Cadastro_Compromisso, Form_Cadastro_Compromisso);
+   try
+     Form_Cadastro_Compromisso.AlterarCompromisso(FAgenda.BuscarCompromisso(LCodCompromisso));
+
+     if Form_Cadastro_Compromisso.ModalResult = mrOk then
+       FAgenda.AlterarAgendamento(TCompromisso.New.Codigo(LCodCompromisso)
+                                                  .DataInicio(Form_Cadastro_Compromisso.DateInicio.Date)
+                                                  .HoraInicio(Form_Cadastro_Compromisso.TimeInicio.Time)
+                                                  .DataFim(Form_Cadastro_Compromisso.DateFinalizacao.Date)
+                                                  .HoraFim(Form_Cadastro_Compromisso.TimeFim.Time)
+                                                  .Assunto(Form_Cadastro_Compromisso.EdtAssunto.Text)
+                                                  .Descricao(Form_Cadastro_Compromisso.MemoDescricao.Text)
+                                  );
+   finally
+     FreeAndNil(Form_Cadastro_Compromisso);
+   end;
+
+   AtualizarGrid;
 end;
 
 end.

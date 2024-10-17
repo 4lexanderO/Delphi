@@ -27,7 +27,6 @@ object Form_Principal: TForm_Principal
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 630
     object PnlOpcoes: TPanel
       Left = 0
       Top = 0
@@ -51,7 +50,7 @@ object Form_Principal: TForm_Principal
         Padding.Bottom = 5
         ShowCaption = False
         TabOrder = 0
-        object SpeedButton1: TSpeedButton
+        object BtnAdicionar: TSpeedButton
           AlignWithMargins = True
           Left = 6
           Top = 54
@@ -63,10 +62,10 @@ object Form_Principal: TForm_Principal
           Margins.Bottom = 0
           Align = alTop
           Caption = 'Adicionar'
-          OnClick = SpeedButton1Click
+          OnClick = BtnAdicionarClick
           ExplicitTop = 6
         end
-        object SpeedButton2: TSpeedButton
+        object BtnAlterar: TSpeedButton
           AlignWithMargins = True
           Left = 6
           Top = 102
@@ -78,10 +77,11 @@ object Form_Principal: TForm_Principal
           Margins.Bottom = 0
           Align = alTop
           Caption = 'Alterar'
+          OnClick = BtnAlterarClick
           ExplicitLeft = 12
           ExplicitTop = 262
         end
-        object SpeedButton3: TSpeedButton
+        object BtnExcluir: TSpeedButton
           AlignWithMargins = True
           Left = 6
           Top = 150
@@ -95,7 +95,7 @@ object Form_Principal: TForm_Principal
           Caption = 'Excluir'
           ExplicitTop = 310
         end
-        object SpeedButton4: TSpeedButton
+        object BtnPesquisar: TSpeedButton
           Left = 6
           Top = 6
           Width = 173
@@ -133,7 +133,6 @@ object Form_Principal: TForm_Principal
       ParentBackground = False
       ShowCaption = False
       TabOrder = 1
-      ExplicitWidth = 445
       object DbgCompromissos: TDBCtrlGrid
         Left = 1
         Top = 1
@@ -143,7 +142,6 @@ object Form_Principal: TForm_Principal
         PanelHeight = 194
         PanelWidth = 392
         TabOrder = 0
-        ExplicitWidth = 443
         object lblCodigo: TDBText
           Left = 12
           Top = 30

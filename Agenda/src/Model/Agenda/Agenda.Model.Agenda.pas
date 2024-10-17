@@ -18,12 +18,14 @@ type
       class function New: IAgenda;
 
       function Agendar(Compromisso: ICompromisso):IAgenda;
-      function AlterarAgendamento(Codigo: integer):ICompromisso;
+      function AlterarAgendamento(Compromisso: ICompromisso):Boolean;
       function RemoverAgendamento(Codigo: integer):Boolean;
       function Compromissos: TList<ICompromisso>;
       function ListarAgendamentos(DataInicio, DataFim: TDateTime): TList<ICompromisso>; overload;
       function ListarAgendamentos: TList<ICompromisso>; overload;
       function Count: integer;
+      function BuscarCompromisso(Codigo: integer):ICompromisso;
+      function PesquisarCompromisso(Codigo: integer): Boolean;
   end;
 
 implementation
@@ -47,18 +49,32 @@ begin
   Result := Self.Create;
 end;
 
+function TAgenda.PesquisarCompromisso(Codigo: integer): Boolean;
+begin
+  Result := False;
+
+  for var i: integer := 0 to FCompromissos.Count -1 do
+    if FCompromissos[i].Codigo = Codigo then
+      Result := True;
+end;
+
 function TAgenda.Agendar(Compromisso: ICompromisso): IAgenda;
 begin
   FCompromissos.Add(Compromisso);
 end;
 
-function TAgenda.AlterarAgendamento(Codigo: integer): ICompromisso;
+function TAgenda.AlterarAgendamento(Compromisso: ICompromisso): Boolean;
 begin
-  for var i:integer := 0 to FCompromissos.Count -1 do
-    begin
-      if FCompromissos[i].Codigo = Codigo then
-        Result := FCompromissos[i];
-    end;
+  for var i: integer := 0 to FCompromissos.Count - 1 do
+    if FCompromissos[i].Codigo = Compromisso.Codigo then
+      FCompromissos[i] := Compromisso;
+end;
+
+function TAgenda.BuscarCompromisso(Codigo: integer): ICompromisso;
+begin
+  for var i: integer := 0 to FCompromissos.Count - 1 do
+    if FCompromissos[i].Codigo = Codigo then
+      Result := FCompromissos[i];
 end;
 
 function TAgenda.ListarAgendamentos(DataInicio, DataFim: TDateTime): TList<ICompromisso>;

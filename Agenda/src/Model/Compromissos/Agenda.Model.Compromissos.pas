@@ -10,7 +10,9 @@ type
     private
       FCodigo: integer;
       FDataInicio: TDateTime;
+      FHoraInicio: TTime;
       FDataFim: TDateTime;
+      FHoraFim: TTime;
       FAssunto: string;
       FDescricao: string;
 
@@ -19,17 +21,21 @@ type
     public
       class function New: ICompromisso;
 
-      function Codigo: integer; overload;
-      function DataInicio: TDateTime; overload;
-      function DataFim: TDateTime; overload;
-      function Assunto: string; overload;
-      function Descricao: string; overload;
+    function Codigo: integer; overload;
+    function DataInicio: TDateTime; overload;
+    function HoraInicio: TTime; overload;
+    function DataFim: TDateTime; overload;
+    function HoraFim: TTime; overload;
+    function Assunto: string; overload;
+    function Descricao: string; overload;
 
-      function Codigo(Value: integer):ICompromisso; overload;
-      function DataInicio(Value: TDateTime):ICompromisso; overload;
-      function DataFim(Value: TDateTime):ICompromisso; overload;
-      function Assunto(Value: string):ICompromisso; overload;
-      function Descricao(Value: string): ICompromisso; overload;
+    function Codigo(Value: integer):ICompromisso; overload;
+    function DataInicio(Value: TDateTime):ICompromisso; overload;
+    function HoraInicio(Value: TTime):ICompromisso; overload;
+    function DataFim(Value: TDateTime):ICompromisso; overload;
+    function HoraFim(Value: TTime):ICompromisso; overload;
+    function Assunto(Value: string):ICompromisso; overload;
+    function Descricao(Value: string): ICompromisso; overload;
 
 
   end;
@@ -50,6 +56,28 @@ end;
 destructor TCompromisso.Destroy;
 begin
   inherited;
+end;
+
+function TCompromisso.HoraFim: TTime;
+begin
+  Result := FHoraFim;
+end;
+
+function TCompromisso.HoraFim(Value: TTime): ICompromisso;
+begin
+  FHoraFim := Value;
+  Result := Self;
+end;
+
+function TCompromisso.HoraInicio: TTime;
+begin
+  Result := FHoraInicio;
+end;
+
+function TCompromisso.HoraInicio(Value: TTime): ICompromisso;
+begin
+  FHoraInicio := Value;
+  Result := Self;
 end;
 
 function TCompromisso.Codigo: integer;
