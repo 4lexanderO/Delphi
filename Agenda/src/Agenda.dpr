@@ -7,7 +7,8 @@ uses
   Agenda.Interfaces.Agenda in 'Model\Agenda\Agenda.Interfaces.Agenda.pas',
   Agenda.Interfaces.Compromissos in 'Model\Compromissos\Agenda.Interfaces.Compromissos.pas',
   Agenda.Model.Compromissos in 'Model\Compromissos\Agenda.Model.Compromissos.pas',
-  Agenda.View.Cadastro.Compromissos in 'View\Compromissos\Agenda.View.Cadastro.Compromissos.pas' {Form_Cadastro_Compromisso};
+  Agenda.View.Cadastro.Compromissos in 'View\Compromissos\Agenda.View.Cadastro.Compromissos.pas' {Form_Cadastro_Compromisso},
+  Agenda.View.Cadastro.Pesquisa.Compromissos in 'View\Compromissos\Agenda.View.Cadastro.Pesquisa.Compromissos.pas' {Form1};
 
 {$R *.res}
 
@@ -17,5 +18,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TForm_Principal, Form_Principal);
+  Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.

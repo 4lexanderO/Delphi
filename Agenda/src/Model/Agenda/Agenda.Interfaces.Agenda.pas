@@ -7,6 +7,8 @@ uses
   System.Generics.Collections;
 
 type
+  TFiltro = (fCodigo);
+
   IAgenda = interface
     ['{E818393C-BB6E-41B6-A5DF-2FED208C8B51}']
 
@@ -19,6 +21,8 @@ type
     function Count: integer;
     function BuscarCompromisso(Codigo: integer):ICompromisso;
     function PesquisarCompromisso(Codigo: integer): Boolean;
+    function LimparCompromissos: IAgenda;
+    function Filtrar(Filtro: TFiltro; Agenda: IAgenda; Value: Extended): IAgenda;
   end;
 
 implementation

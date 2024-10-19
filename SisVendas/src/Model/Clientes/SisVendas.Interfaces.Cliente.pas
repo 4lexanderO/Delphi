@@ -14,16 +14,22 @@ uses
   System.Generics.Collections;
 
 type
+  TTipoCliente = (tpPessoaFisica, tpPessoaJuridica);
+
   ICliente = interface
     ['{1E929DC4-3679-4EB1-A9FD-FFC37F5FDE14}']
 
     function Codigo: integer; overload;
-    function Nome: string; overload;
-    function Idade: integer;
+    function RazaoSocial: string; overload;
+    function NomeFantasia: string; overload;
+    function Tipo: TTipoCliente; overload;
+    function Documento: string; overload;
 
     function Codigo(Value: integer): ICliente; overload;
-    function Nome(Value: string): ICliente; overload;
-    function AnoNascimento(Value: integer): ICliente; overload;
+    function RazaoSocial(Value: string): ICliente; overload;
+    function NomeFantasia(Value: string): ICliente; overload;
+    function Tipo(Value: TTipoCliente): ICliente; overload;
+    function Documento(Value: string): ICliente; overload;
   end;
 
   IDAOCliente = interface

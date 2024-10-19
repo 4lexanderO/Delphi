@@ -21,6 +21,8 @@ type
 
       constructor Create;
       destructor Destroy; override;
+
+
     public
       function Codigo: integer; overload;
       function Nome: string; overload;

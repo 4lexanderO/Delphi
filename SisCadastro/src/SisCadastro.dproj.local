@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/09/17 09:24:33.000.232,=C:\Users\marzi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/09/17 09:24:50.000.425,=C:\Users\marzi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/10/09 16:24:41.805,=C:\Users\marzi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/10/09 16:25:18.417,C:\Users\marzi\Documents\Development\Delphi\_Git\Delphi\SisCadastro\src\View\SisCadastro.View.Principal.dfm=C:\Users\marzi\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024/10/09 16:25:18.417,C:\Users\marzi\Documents\Development\Delphi\_Git\Delphi\SisCadastro\src\View\SisCadastro.View.Principal.pas=C:\Users\marzi\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/10/09 16:25:25.033,C:\Users\marzi\Documents\Development\Delphi\_Git\Delphi\SisCadastro\src\SisCadastro.dproj=C:\Users\marzi\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2024/10/09 16:26:27.750,=C:\Users\marzi\Documents\Development\Delphi\_Git\Delphi\SisCadastro\src\Unit1.pas</Transaction>
+    <Transaction>2024/10/09 16:26:59.501,C:\Users\marzi\Documents\Development\Delphi\_Git\Delphi\SisCadastro\src\View\Cadastro\SisCadastro.View.Cadastro.pas=C:\Users\marzi\Documents\Development\Delphi\_Git\Delphi\SisCadastro\src\Unit1.pas</Transaction>
+    <Transaction>2024/10/09 16:26:59.501,C:\Users\marzi\Documents\Development\Delphi\_Git\Delphi\SisCadastro\src\View\Cadastro\SisCadastro.View.Cadastro.dfm=C:\Users\marzi\Documents\Development\Delphi\_Git\Delphi\SisCadastro\src\Unit1.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

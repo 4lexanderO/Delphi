@@ -47,6 +47,8 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BtnAdicionarClick(Sender: TObject);
     procedure BtnAlterarClick(Sender: TObject);
+    procedure BtnExcluirClick(Sender: TObject);
+    procedure BtnPesquisarClick(Sender: TObject);
   private
     { Private declarations }
     FDataSource: TDataSource;
@@ -54,7 +56,7 @@ type
     FAgenda: IAgenda;
 
     procedure CriarTabelaAgenda;
-    procedure AtualizarGrid;
+    procedure AtualizarGrid(Agenda: IAgenda);
     procedure ConfigurarExibicao;
   public
     { Public declarations }
@@ -69,25 +71,25 @@ uses
   Agenda.Model.Agenda,
   Agenda.Interfaces.Compromissos,
   Agenda.Model.Compromissos,
-  Agenda.View.Cadastro.Compromissos;
+  Agenda.View.Cadastro.Compromissos, Agenda.View.Pesquisa.Compromissos;
 
 {$R *.dfm}
 
-procedure TForm_Principal.AtualizarGrid;
+procedure TForm_Principal.AtualizarGrid(Agenda: IAgenda);
 begin
   FTableCompromissos.DisableControls;
   try
     FTableCompromissos.Close;
     FTableCompromissos.Open;
 
-    for var i:integer := 0 to FAgenda.Count -1 do
+    for var i:integer := 0 to Agenda.Count -1 do
        begin
          FTableCompromissos.Append;
-         FTableCompromissos.FieldByName('Codigo').AsInteger := FAgenda.Compromissos[i].Codigo;
-         FTableCompromissos.FieldByName('DataInicio').AsDateTime := FAgenda.Compromissos[i].DataInicio;
-         FTableCompromissos.FieldByName('DataFim').AsDateTime := FAgenda.Compromissos[i].DataFim;
-         FTableCompromissos.FieldByName('Assunto').AsString := FAgenda.Compromissos[i].Assunto;
-         FTableCompromissos.FieldByName('Descricao').AsString := FAgenda.Compromissos[i].Descricao;
+         FTableCompromissos.FieldByName('Codigo').AsInteger := Agenda.Compromissos[i].Codigo;
+         FTableCompromissos.FieldByName('DataInicio').AsDateTime := Agenda.Compromissos[i].DataInicio;
+         FTableCompromissos.FieldByName('DataFim').AsDateTime := Agenda.Compromissos[i].DataFim;
+         FTableCompromissos.FieldByName('Assunto').AsString := Agenda.Compromissos[i].Assunto;
+         FTableCompromissos.FieldByName('Descricao').AsString := Agenda.Compromissos[i].Descricao;
 
          FTableCompromissos.Post;
        end;
@@ -160,7 +162,7 @@ begin
      FreeAndNil(Form_Cadastro_Compromisso);
    end;
 
-  AtualizarGrid;
+  AtualizarGrid(FAgenda);
 end;
 
 procedure TForm_Principal.BtnAlterarClick(Sender: TObject);
@@ -169,7 +171,9 @@ var
   LCodCompromisso: integer;
 
 begin
-   InputQuery('Informe o código do compromisso a ser alterado','Alteração de valor', LInputCompromisso);
+   if not InputQuery('Alteração de compromisso','Informe o código do compromisso a ser alterado:', LInputCompromisso) then
+     Exit;
+
    LCodCompromisso := StrToIntDef(LInputCompromisso, 0);
 
    if (LCodCompromisso <= 0) or (not FAgenda.PesquisarCompromisso(LCodCompromisso)) then
@@ -192,7 +196,46 @@ begin
      FreeAndNil(Form_Cadastro_Compromisso);
    end;
 
-   AtualizarGrid;
+   AtualizarGrid(FAgenda);
+end;
+
+procedure TForm_Principal.BtnExcluirClick(Sender: TObject);
+var
+  LInputCodCompromisso: string;
+  LCodCompromisso: integer;
+begin
+  if not InputQuery('Exclusão de Compromisso','Informe o código do compromisso a ser excluído:', LInputCodCompromisso) then
+     Exit;
+
+  LCodCompromisso := StrToIntDef(LInputCodCompromisso, 0);
+
+  if (LCodCompromisso <= 0) or (not FAgenda.PesquisarCompromisso(LCodCompromisso)) then
+    raise Exception.Create('Compromisso não encontrado!');
+
+  FAgenda.RemoverAgendamento(LCodCompromisso);
+
+  AtualizarGrid(FAgenda)
+end;
+
+procedure TForm_Principal.BtnPesquisarClick(Sender: TObject);
+var
+  LAgenda: IAgenda;
+begin
+  Application.CreateForm(TForm_Pesquisa_Compromissos, Form_Pesquisa_Compromissos);
+  try
+    LAgenda := TAgenda.New;
+    LAgenda := FAgenda;
+
+    Form_Pesquisa_Compromissos.Pesquisar(LAgenda);
+
+    if Form_Pesquisa_Compromissos.ModalResult = mrOk then
+      AtualizarGrid(Form_Pesquisa_Compromissos.Agenda)
+    else
+      AtualizarGrid(FAgenda);
+
+  finally
+    FreeAndNil(Form_Pesquisa_Compromissos);
+  end;
 end;
 
 end.

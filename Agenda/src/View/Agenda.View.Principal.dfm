@@ -11,10 +11,8 @@ object Form_Principal: TForm_Principal
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = False
   OnClose = FormClose
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 13
   object PnlBackground: TPanel
     Left = 0
@@ -38,6 +36,7 @@ object Form_Principal: TForm_Principal
       ParentBackground = False
       ShowCaption = False
       TabOrder = 0
+      ExplicitHeight = 578
       object PnlBotoes: TPanel
         Left = 0
         Top = 41
@@ -50,6 +49,7 @@ object Form_Principal: TForm_Principal
         Padding.Bottom = 5
         ShowCaption = False
         TabOrder = 0
+        ExplicitHeight = 537
         object BtnAdicionar: TSpeedButton
           AlignWithMargins = True
           Left = 6
@@ -93,6 +93,7 @@ object Form_Principal: TForm_Principal
           Margins.Bottom = 0
           Align = alTop
           Caption = 'Excluir'
+          OnClick = BtnExcluirClick
           ExplicitTop = 310
         end
         object BtnPesquisar: TSpeedButton
@@ -102,6 +103,7 @@ object Form_Principal: TForm_Principal
           Height = 43
           Align = alTop
           Caption = 'Pesquisar'
+          OnClick = BtnPesquisarClick
           ExplicitTop = -25
         end
       end
@@ -140,8 +142,10 @@ object Form_Principal: TForm_Principal
         Height = 584
         Align = alClient
         PanelHeight = 194
-        PanelWidth = 392
+        PanelWidth = 388
         TabOrder = 0
+        ExplicitWidth = 407
+        ExplicitHeight = 576
         object lblCodigo: TDBText
           Left = 12
           Top = 30

@@ -11,7 +11,8 @@ uses
   SisVendas.Model.Sistema.Mensagens in 'Model\Sistema\Mensagens\SisVendas.Model.Sistema.Mensagens.pas',
   SisVendas.Interfaces.Model.Sistema.Mensagens in 'Model\Sistema\Mensagens\SisVendas.Interfaces.Model.Sistema.Mensagens.pas',
   SisVendas.Model.DAO.Cliente in 'Model\Clientes\SisVendas.Model.DAO.Cliente.pas',
-  SisVendas.Model.Singleton.Vendas in 'Model\Vendas\SisVendas.Model.Singleton.Vendas.pas';
+  SisVendas.Model.Singleton.Vendas in 'Model\Vendas\SisVendas.Model.Singleton.Vendas.pas',
+  SisVendas.View.Cadastro.Clientes in 'View\Clientes\SisVendas.View.Cadastro.Clientes.pas' {Form_Cadastro_Clientes};
 
 {$R *.res}
 
@@ -23,6 +24,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TForm_Principal, Form_Principal);
-  Application.CreateForm(TForm_Sistema_Mensagens, Form_Sistema_Mensagens);
   Application.Run;
 end.

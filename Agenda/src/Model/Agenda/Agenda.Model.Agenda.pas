@@ -26,6 +26,8 @@ type
       function Count: integer;
       function BuscarCompromisso(Codigo: integer):ICompromisso;
       function PesquisarCompromisso(Codigo: integer): Boolean;
+      function LimparCompromissos: IAgenda;
+      function Filtrar(Filtro: TFiltro; Agenda: IAgenda; Value: Extended): IAgenda;
   end;
 
 implementation
@@ -42,6 +44,24 @@ begin
   inherited;
 
   FCompromissos.Free;
+end;
+
+function TAgenda.Filtrar(Filtro: TFiltro; Agenda: IAgenda; Value: Extended): IAgenda;
+var
+  LAgenda: IAgenda;
+begin
+  case Filtro of
+    fCodigo: begin
+               LAgenda := TAgenda.New;
+
+               for var i: integer := 0 to Agenda.Count -1 do
+                 if Agenda.Compromissos[i].Codigo = Value then
+                   LAgenda.Agendar(Agenda.Compromissos[i]);
+
+               Result := LAgenda;
+             end;
+  end;
+
 end;
 
 class function TAgenda.New: IAgenda;
@@ -105,6 +125,14 @@ begin
   for var i: integer := 0 to FCompromissos.Count -1 do
     if FCompromissos[i].Codigo = Codigo then
       FCompromissos.Remove(FCompromissos[i]);
+end;
+
+function TAgenda.LimparCompromissos: IAgenda;
+begin
+  for var i: integer := 0 to FCompromissos.Count -1 do
+    RemoverAgendamento(FCompromissos[i].Codigo);
+
+  Result := Self;
 end;
 
 function TAgenda.ListarAgendamentos: TList<ICompromisso>;

@@ -1,0 +1,16 @@
+program SisCadastro;
+
+uses
+  Vcl.Forms,
+  SisCadastro.View.Principal in 'View\SisCadastro.View.Principal.pas' {Form_Principal},
+  SisCadastro.View.Cadastro in 'View\Cadastro\SisCadastro.View.Cadastro.pas' {Form1};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm_Principal, Form_Principal);
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.
