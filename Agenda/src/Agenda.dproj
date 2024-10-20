@@ -85,7 +85,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
@@ -116,10 +115,14 @@
             <Form>Form_Cadastro_Compromisso</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="View\Compromissos\Agenda.View.Cadastro.Pesquisa.Compromissos.pas">
-            <Form>Form1</Form>
+        <DCCReference Include="View\Compromissos\Agenda.View.Pesquisa.Compromissos.pas">
+            <Form>Form_Pesquisa_Compromissos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Controller\Principal\Agenda.Controller.Principal.pas"/>
+        <DCCReference Include="Controller\Principal\Agenda.Interfaces.Controller.Principal.pas"/>
+        <DCCReference Include="Controller\Compromissos\Agenda.Controller.Cadastro.Compromissos.pas"/>
+        <DCCReference Include="Controller\Compromissos\Agenda.Interfaces.Controller.Cadastro.Compromissos.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -141,18 +144,8 @@
                     <Source Name="MainSource">Agenda.dpr</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="D:\Delphi\Componentes\acbr\Lib\Delphi\LibD27\Win32\DCLACBr_PagFor.bpl">ACBr - (design-time) Pagamento a Fornecedor - (http://www.projetoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="D:\Delphi\Componentes\acbr\Lib\Delphi\LibD27\Win32\DCLACBr_DebitoAutomatico.bpl">ACBr - (design-time) Debito Automatico - (http://www.projetoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="D:\Delphi\Componentes\acbr\Lib\Delphi\LibD27\Win32\DCLACBr_NFe.bpl">ACBr - (design-time) Nota Fiscal Eletrônica - (http://www.projetoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="D:\Delphi\Componentes\acbr\Lib\Delphi\LibD27\Win32\DCLACBr_NFCeECFVirtual.bpl">ACBr - (design-time) Implementação ECF Virtual NFCe. Permite usar ACBrECF para emitir NFCe como se fosse um ECF - (http://www.projectoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="D:\Delphi\Componentes\acbr\Lib\Delphi\LibD27\Win32\DCLACBr_NFeDanfeESCPOS.bpl">ACBr - (design-time) DANFe para NFC-e Impressora Serial - (http://www.projetoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="D:\Delphi\Componentes\acbr\Lib\Delphi\LibD27\Win32\DCLACBr_CTe.bpl">ACBr - (design-time) Conhecimento de Transporte Eletrônico - (http://www.projetoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="D:\Delphi\Componentes\acbr\Lib\Delphi\LibD27\Win32\DCLACBr_NFSe.bpl">ACBr - (design-time) Nota Fiscal de Serviço Eletrônica - (http://www.projetoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="D:\Delphi\Componentes\acbr\Lib\Delphi\LibD27\Win32\DCLACBr_NFSeX.bpl">ACBr - (design-time) Nota Fiscal de Serviço Eletrônica X - (http://www.projetoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="D:\Delphi\Componentes\acbr\Lib\Delphi\LibD27\Win32\DCLACBr_PIXCD.bpl">ACBr - (design-time) ACBrPIXCD - Package para componentes relacionados a PIX e Carteira Digitais</Excluded_Packages>
-                    <Excluded_Packages Name="D:\Delphi\Componentes\acbr\Lib\Delphi\LibD27\Win32\DCLACBr_Boleto.bpl">ACBr - (design-time) Boleto - (http://www.projetoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k290.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp290.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="4">

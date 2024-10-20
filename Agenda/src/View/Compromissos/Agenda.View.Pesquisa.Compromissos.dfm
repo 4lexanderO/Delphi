@@ -23,10 +23,8 @@ object Form_Pesquisa_Compromissos: TForm_Pesquisa_Compromissos
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitLeft = 232
-    ExplicitTop = 224
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitWidth = 622
+    ExplicitHeight = 433
     object PnlBotoes: TPanel
       Left = 0
       Top = 0
@@ -37,9 +35,7 @@ object Form_Pesquisa_Compromissos: TForm_Pesquisa_Compromissos
       ParentBackground = False
       ShowCaption = False
       TabOrder = 0
-      ExplicitLeft = 1
-      ExplicitTop = 1
-      ExplicitHeight = 439
+      ExplicitHeight = 433
       object PnlOpcoes: TPanel
         Left = 1
         Top = 42
@@ -50,9 +46,7 @@ object Form_Pesquisa_Compromissos: TForm_Pesquisa_Compromissos
         ParentBackground = False
         ShowCaption = False
         TabOrder = 0
-        ExplicitLeft = 25
-        ExplicitTop = 185
-        ExplicitHeight = 41
+        ExplicitHeight = 390
         object BtnConfirmar: TSpeedButton
           Left = 1
           Top = 1
@@ -93,7 +87,6 @@ object Form_Pesquisa_Compromissos: TForm_Pesquisa_Compromissos
         ParentBackground = False
         ParentFont = False
         TabOrder = 1
-        ExplicitWidth = 132
       end
     end
     object Panel2: TPanel
@@ -106,10 +99,8 @@ object Form_Pesquisa_Compromissos: TForm_Pesquisa_Compromissos
       ParentBackground = False
       ShowCaption = False
       TabOrder = 1
-      ExplicitLeft = 320
-      ExplicitTop = 160
-      ExplicitWidth = 185
-      ExplicitHeight = 41
+      ExplicitWidth = 486
+      ExplicitHeight = 433
       object ckCodigo: TCheckBox
         Left = 16
         Top = 17

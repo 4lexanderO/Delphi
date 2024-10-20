@@ -25,6 +25,8 @@ object Form_Principal: TForm_Principal
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
+    ExplicitWidth = 594
+    ExplicitHeight = 578
     object PnlOpcoes: TPanel
       Left = 0
       Top = 0
@@ -63,7 +65,7 @@ object Form_Principal: TForm_Principal
           Align = alTop
           Caption = 'Adicionar'
           OnClick = BtnAdicionarClick
-          ExplicitTop = 6
+          ExplicitLeft = 9
         end
         object BtnAlterar: TSpeedButton
           AlignWithMargins = True
@@ -135,6 +137,8 @@ object Form_Principal: TForm_Principal
       ParentBackground = False
       ShowCaption = False
       TabOrder = 1
+      ExplicitWidth = 409
+      ExplicitHeight = 578
       object DbgCompromissos: TDBCtrlGrid
         Left = 1
         Top = 1

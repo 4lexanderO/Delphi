@@ -56,7 +56,7 @@ end;
 procedure TForm_Pesquisa_Compromissos.BtnConfirmarClick(Sender: TObject);
 begin
   if ckCodigo.Checked then
-    FAgenda := FAgenda.Filtrar(fCodigo, FAgenda, StrToInt(EdtCodigo.Text));
+    FAgenda := FAgenda.Filtrar(ftCodigo, FAgenda, StrToInt(EdtCodigo.Text));
 
   ModalResult := mrOk;
 end;

@@ -13,21 +13,22 @@ type
       FCompromissos: TList<ICompromisso>;
 
       constructor Create;
-      destructor Destroy; override;
+
     public
       class function New: IAgenda;
+      destructor Destroy; override;
 
-      function Agendar(Compromisso: ICompromisso):IAgenda;
-      function AlterarAgendamento(Compromisso: ICompromisso):Boolean;
-      function RemoverAgendamento(Codigo: integer):Boolean;
+      function Agendar(Compromisso: ICompromisso): IAgenda;
+      function Alterar(Compromisso: ICompromisso): Boolean;
+      function Remover(Compromisso: ICompromisso): Boolean;
       function Compromissos: TList<ICompromisso>;
-      function ListarAgendamentos(DataInicio, DataFim: TDateTime): TList<ICompromisso>; overload;
-      function ListarAgendamentos: TList<ICompromisso>; overload;
-      function Count: integer;
-      function BuscarCompromisso(Codigo: integer):ICompromisso;
+      function Listar: TList<ICompromisso>;
+
       function PesquisarCompromisso(Codigo: integer): Boolean;
-      function LimparCompromissos: IAgenda;
-      function Filtrar(Filtro: TFiltro; Agenda: IAgenda; Value: Extended): IAgenda;
+      function BuscarCompromisso(Codigo: integer): ICompromisso;
+
+      function LimparAgenda: IAgenda;
+      function Filtrar(Filtro: TFiltro; Agenda: IAgenda; Value: Variant): IAgenda;
   end;
 
 implementation
@@ -39,6 +40,11 @@ begin
   FCompromissos := TList<ICompromisso>.Create;
 end;
 
+class function TAgenda.New: IAgenda;
+begin
+  Result := Self.Create;
+end;
+
 destructor TAgenda.Destroy;
 begin
   inherited;
@@ -46,27 +52,33 @@ begin
   FCompromissos.Free;
 end;
 
-function TAgenda.Filtrar(Filtro: TFiltro; Agenda: IAgenda; Value: Extended): IAgenda;
-var
-  LAgenda: IAgenda;
+function TAgenda.Agendar(Compromisso: ICompromisso): IAgenda;
 begin
-  case Filtro of
-    fCodigo: begin
-               LAgenda := TAgenda.New;
-
-               for var i: integer := 0 to Agenda.Count -1 do
-                 if Agenda.Compromissos[i].Codigo = Value then
-                   LAgenda.Agendar(Agenda.Compromissos[i]);
-
-               Result := LAgenda;
-             end;
-  end;
-
+  FCompromissos.Add(Compromisso);
 end;
 
-class function TAgenda.New: IAgenda;
+function TAgenda.Alterar(Compromisso: ICompromisso): Boolean;
 begin
-  Result := Self.Create;
+  Result := False;
+  for var i: integer := 0 to FCompromissos.Count - 1 do
+    if FCompromissos[i].Codigo = Compromisso.Codigo then
+      FCompromissos[i] := Compromisso;
+end;
+
+function TAgenda.Remover(Compromisso: ICompromisso): Boolean;
+begin
+  Result := False;
+  FCompromissos.Remove(Compromisso);
+end;
+
+function TAgenda.Compromissos: TList<ICompromisso>;
+begin
+  Result := FCompromissos;
+end;
+
+function TAgenda.Listar: TList<ICompromisso>;
+begin
+  Result := FCompromissos;
 end;
 
 function TAgenda.PesquisarCompromisso(Codigo: integer): Boolean;
@@ -78,66 +90,39 @@ begin
       Result := True;
 end;
 
-function TAgenda.Agendar(Compromisso: ICompromisso): IAgenda;
+function TAgenda.Filtrar(Filtro: TFiltro; Agenda: IAgenda; Value: Variant): IAgenda;
+var
+  LAgenda: IAgenda;
 begin
-  FCompromissos.Add(Compromisso);
+  LAgenda := TAgenda.New;
+
+  case Filtro of
+    ftCodigo: begin
+               for var i: integer := 0 to Agenda.Compromissos.Count -1 do
+                 if Agenda.Compromissos[i].Codigo = Value then
+                   LAgenda.Agendar(Agenda.Compromissos[i]);
+
+               Result := LAgenda;
+             end;
+  end;
 end;
 
-function TAgenda.AlterarAgendamento(Compromisso: ICompromisso): Boolean;
+function TAgenda.LimparAgenda: IAgenda;
 begin
-  for var i: integer := 0 to FCompromissos.Count - 1 do
-    if FCompromissos[i].Codigo = Compromisso.Codigo then
-      FCompromissos[i] := Compromisso;
+  for var i: integer := 0 to FCompromissos.Count -1 do
+    Remover(FCompromissos[i]);
+
+  Result := Self;
 end;
 
 function TAgenda.BuscarCompromisso(Codigo: integer): ICompromisso;
 begin
   for var i: integer := 0 to FCompromissos.Count - 1 do
     if FCompromissos[i].Codigo = Codigo then
-      Result := FCompromissos[i];
-end;
-
-function TAgenda.ListarAgendamentos(DataInicio, DataFim: TDateTime): TList<ICompromisso>;
-var
-  LCompromissos: TList<ICompromisso>;
-begin
-  LCompromissos := TList<ICompromisso>.Create;
-
-  for var i:integer := 0 to FCompromissos.Count -1 do
-    if (FCompromissos[i].DataInicio >= DataInicio) and (FCompromissos[i].DataFim <= DataFim) then
-      LCompromissos.Add(FCompromissos[i]);
-
-  Result := LCompromissos;
-end;
-
-function TAgenda.Compromissos: TList<ICompromisso>;
-begin
-  Result := FCompromissos;
-end;
-
-function TAgenda.Count: integer;
-begin
-  Result := FCompromissos.Count;
-end;
-
-function TAgenda.RemoverAgendamento(Codigo: integer): Boolean;
-begin
-  for var i: integer := 0 to FCompromissos.Count -1 do
-    if FCompromissos[i].Codigo = Codigo then
-      FCompromissos.Remove(FCompromissos[i]);
-end;
-
-function TAgenda.LimparCompromissos: IAgenda;
-begin
-  for var i: integer := 0 to FCompromissos.Count -1 do
-    RemoverAgendamento(FCompromissos[i].Codigo);
-
-  Result := Self;
-end;
-
-function TAgenda.ListarAgendamentos: TList<ICompromisso>;
-begin
-  Result := FCompromissos;
+      begin
+        Result := FCompromissos[i];
+        Exit;
+      end;
 end;
 
 end.

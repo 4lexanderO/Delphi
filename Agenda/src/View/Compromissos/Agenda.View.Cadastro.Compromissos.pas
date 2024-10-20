@@ -16,9 +16,7 @@ uses
   Vcl.StdCtrls,
   Vcl.ComCtrls,
   Vcl.Buttons,
-  System.DateUtils,
-  Agenda.Interfaces.Agenda,
-  Agenda.Interfaces.Compromissos;
+  System.DateUtils;
 
 type
   TForm_Cadastro_Compromisso = class(TForm)
@@ -45,14 +43,10 @@ type
     Label7: TLabel;
     procedure BtnSalvarClick(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
-    procedure DateFinalizacaoExit(Sender: TObject);
   private
     { Private declarations }
-    FCompromisso: ICompromisso;
   public
     { Public declarations }
-    procedure AdicionarCompromisso(Codigo: integer);
-    procedure AlterarCompromisso(const Compromisso: ICompromisso);
   end;
 
 var
@@ -61,34 +55,6 @@ var
 implementation
 
 {$R *.dfm}
-
-procedure TForm_Cadastro_Compromisso.AdicionarCompromisso(Codigo: integer);
-begin
-  EdtCodigo.Text := Codigo.ToString;
-  Self.Caption := 'Adicionar Compromisso';
-
-  DateInicio.Date := Now;
-  TimeInicio.Time := Now;
-  DateFinalizacao.Date := Now;
-  TimeFim.Time := IncHour(Now, 1);
-
-  Self.ShowModal;
-end;
-
-procedure TForm_Cadastro_Compromisso.AlterarCompromisso(const Compromisso: ICompromisso);
-begin
-  FCompromisso := Compromisso;
-
-  EdtCodigo.Text := FCompromisso.Codigo.ToString;
-  DateInicio.Date := FCompromisso.DataInicio;
-  TimeInicio.Time := FCompromisso.HoraInicio;
-  DateFinalizacao.Date := FCompromisso.DataFim;
-  TimeFim.Time := FCompromisso.HoraFim;
-  EdtAssunto.Text := FCompromisso.Assunto;
-  MemoDescricao.Text := FCompromisso.Descricao;
-
-  Self.ShowModal;
-end;
 
 procedure TForm_Cadastro_Compromisso.BtnCancelarClick(Sender: TObject);
 begin
@@ -118,11 +84,6 @@ begin
   end;
 
   ModalResult := mrOk;
-end;
-
-procedure TForm_Cadastro_Compromisso.DateFinalizacaoExit(Sender: TObject);
-begin
-  DateFinalizacao.Time := DateFinalizacao.DateTime;
 end;
 
 end.

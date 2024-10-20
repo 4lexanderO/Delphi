@@ -11,9 +11,7 @@ object Form_Cadastro_Compromisso: TForm_Cadastro_Compromisso
   Font.Height = -13
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = False
   Position = poOwnerFormCenter
-  PixelsPerInch = 96
   TextHeight = 16
   object PnlBackground: TPanel
     Left = 0
@@ -26,6 +24,8 @@ object Form_Cadastro_Compromisso: TForm_Cadastro_Compromisso
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
+    ExplicitWidth = 421
+    ExplicitHeight = 474
     object PnlBotoes: TPanel
       Left = 0
       Top = 438
@@ -34,6 +34,8 @@ object Form_Cadastro_Compromisso: TForm_Cadastro_Compromisso
       Align = alBottom
       ShowCaption = False
       TabOrder = 0
+      ExplicitTop = 430
+      ExplicitWidth = 421
       object BtnSalvar: TSpeedButton
         Left = 1
         Top = 1
@@ -63,6 +65,8 @@ object Form_Cadastro_Compromisso: TForm_Cadastro_Compromisso
       Align = alClient
       ShowCaption = False
       TabOrder = 1
+      ExplicitWidth = 421
+      ExplicitHeight = 430
       object Label1: TLabel
         Left = 26
         Top = 16
@@ -156,7 +160,6 @@ object Form_Cadastro_Compromisso: TForm_Cadastro_Compromisso
           ShowHint = False
           TabOrder = 0
           TabStop = False
-          OnExit = DateFinalizacaoExit
         end
         object DateInicio: TDateTimePicker
           Left = 130
@@ -184,7 +187,6 @@ object Form_Cadastro_Compromisso: TForm_Cadastro_Compromisso
           ShowHint = False
           TabOrder = 2
           TabStop = False
-          OnExit = DateFinalizacaoExit
         end
         object TimeInicio: TDateTimePicker
           Left = 294

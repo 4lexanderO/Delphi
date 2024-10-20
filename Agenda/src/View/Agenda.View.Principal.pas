@@ -17,9 +17,10 @@ uses
   Vcl.DBCGrids,
   Data.DB,
   FireDAC.Comp.Client,
-  Agenda.Interfaces.Agenda,
   Vcl.StdCtrls,
-  Vcl.DBCtrls;
+  Vcl.DBCtrls,
+  Agenda.Interfaces.Agenda,
+  Agenda.Interfaces.Controller.Principal;
 
 type
   TForm_Principal = class(TForm)
@@ -53,7 +54,7 @@ type
     { Private declarations }
     FDataSource: TDataSource;
     FTableCompromissos: TFDMemTable;
-    FAgenda: IAgenda;
+    FControllerPrincipal: IControllerPrincipal;
 
     procedure CriarTabelaAgenda;
     procedure AtualizarGrid(Agenda: IAgenda);
@@ -68,34 +69,30 @@ var
 implementation
 
 uses
-  Agenda.Model.Agenda,
-  Agenda.Interfaces.Compromissos,
-  Agenda.Model.Compromissos,
-  Agenda.View.Cadastro.Compromissos, Agenda.View.Pesquisa.Compromissos;
+  Agenda.Controller.Principal;
 
 {$R *.dfm}
 
-procedure TForm_Principal.AtualizarGrid(Agenda: IAgenda);
+procedure TForm_Principal.FormCreate(Sender: TObject);
 begin
-  FTableCompromissos.DisableControls;
-  try
-    FTableCompromissos.Close;
-    FTableCompromissos.Open;
+  FDataSource := TDataSource.Create(nil);
+  FTableCompromissos := TFDMemTable.Create(nil);
 
-    for var i:integer := 0 to Agenda.Count -1 do
-       begin
-         FTableCompromissos.Append;
-         FTableCompromissos.FieldByName('Codigo').AsInteger := Agenda.Compromissos[i].Codigo;
-         FTableCompromissos.FieldByName('DataInicio').AsDateTime := Agenda.Compromissos[i].DataInicio;
-         FTableCompromissos.FieldByName('DataFim').AsDateTime := Agenda.Compromissos[i].DataFim;
-         FTableCompromissos.FieldByName('Assunto').AsString := Agenda.Compromissos[i].Assunto;
-         FTableCompromissos.FieldByName('Descricao').AsString := Agenda.Compromissos[i].Descricao;
+  FControllerPrincipal := TControllerPrincipal.New;
 
-         FTableCompromissos.Post;
-       end;
-  finally
-    FTableCompromissos.EnableControls;
-  end;
+  CriarTabelaAgenda;
+  FDataSource.DataSet := FTableCompromissos;
+  DbgCompromissos.DataSource := FDataSource;
+  ConfigurarExibicao;
+end;
+
+procedure TForm_Principal.CriarTabelaAgenda;
+begin
+  FTableCompromissos.FieldDefs.Add('Codigo', ftInteger, 0, False);
+  FTableCompromissos.FieldDefs.Add('DataInicio', ftDateTime, 0, False);
+  FTableCompromissos.FieldDefs.Add('DataFim', ftDateTime, 0, False);
+  FTableCompromissos.FieldDefs.Add('Assunto', ftstring, 50, False);
+  FTableCompromissos.FieldDefs.Add('Descricao', ftstring, 500, False);
 end;
 
 procedure TForm_Principal.ConfigurarExibicao;
@@ -113,13 +110,30 @@ begin
   memoDescricao.DataField := 'Descricao';
 end;
 
-procedure TForm_Principal.CriarTabelaAgenda;
+procedure TForm_Principal.AtualizarGrid(Agenda: IAgenda);
 begin
-  FTableCompromissos.FieldDefs.Add('Codigo', ftInteger, 0, False);
-  FTableCompromissos.FieldDefs.Add('DataInicio', ftDateTime, 0, False);
-  FTableCompromissos.FieldDefs.Add('DataFim', ftDateTime, 0, False);
-  FTableCompromissos.FieldDefs.Add('Assunto', ftstring, 50, False);
-  FTableCompromissos.FieldDefs.Add('Descricao', ftstring, 500, False);
+  FTableCompromissos.DisableControls;
+  try
+    FTableCompromissos.Close;
+    FTableCompromissos.Open;
+
+    if Agenda.Compromissos.Count <= 0 then
+      Exit;
+
+    for var i:integer := 0 to Agenda.Compromissos.Count -1 do
+       begin
+         FTableCompromissos.Append;
+         FTableCompromissos.FieldByName('Codigo').AsInteger := Agenda.Compromissos[i].Codigo;
+         FTableCompromissos.FieldByName('DataInicio').AsDateTime := Agenda.Compromissos[i].DataInicio;
+         FTableCompromissos.FieldByName('DataFim').AsDateTime := Agenda.Compromissos[i].DataFim;
+         FTableCompromissos.FieldByName('Assunto').AsString := Agenda.Compromissos[i].Assunto;
+         FTableCompromissos.FieldByName('Descricao').AsString := Agenda.Compromissos[i].Descricao;
+
+         FTableCompromissos.Post;
+       end;
+  finally
+    FTableCompromissos.EnableControls;
+  end;
 end;
 
 procedure TForm_Principal.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -128,114 +142,37 @@ begin
   FTableCompromissos.Free;
 end;
 
-procedure TForm_Principal.FormCreate(Sender: TObject);
-begin
-  FDataSource := TDataSource.Create(nil);
-  FTableCompromissos := TFDMemTable.Create(nil);
-
-  FAgenda := TAgenda.New;
-
-  CriarTabelaAgenda;
-
-  FDataSource.DataSet := FTableCompromissos;
-  DbgCompromissos.DataSource := FDataSource;
-  ConfigurarExibicao;
-end;
-
 procedure TForm_Principal.BtnAdicionarClick(Sender: TObject);
 begin
-   Application.CreateForm(TForm_Cadastro_Compromisso, Form_Cadastro_Compromisso);
-   try
-     Form_Cadastro_Compromisso.AdicionarCompromisso(FAgenda.Compromissos.Count + 1);
-
-     if Form_Cadastro_Compromisso.ModalResult = mrOk then
-     begin
-       FAgenda.Agendar( TCompromisso.New.Codigo(FAgenda.Compromissos.Count + 1)
-                                        .DataInicio(Form_Cadastro_Compromisso.DateInicio.Date + Form_Cadastro_Compromisso.TimeInicio.Time)
-                                        .DataFim(Form_Cadastro_Compromisso.DateFinalizacao.Date + Form_Cadastro_Compromisso.TimeFim.Time)
-                                        .Assunto(Form_Cadastro_Compromisso.EdtAssunto.Text)
-                                        .Descricao(Form_Cadastro_Compromisso.MemoDescricao.Text))
-     end
-     else
-       Exit;
-   finally
-     FreeAndNil(Form_Cadastro_Compromisso);
-   end;
-
-  AtualizarGrid(FAgenda);
+  FControllerPrincipal.Agendar;
+  AtualizarGrid(FControllerPrincipal.Agenda);
 end;
 
 procedure TForm_Principal.BtnAlterarClick(Sender: TObject);
-var
-  LInputCompromisso: string;
-  LCodCompromisso: integer;
-
 begin
-   if not InputQuery('Alteração de compromisso','Informe o código do compromisso a ser alterado:', LInputCompromisso) then
-     Exit;
+  if FControllerPrincipal.Agenda.Compromissos.Count = 0 then
+    raise Exception.Create('Não há compromissos para alterar!');
 
-   LCodCompromisso := StrToIntDef(LInputCompromisso, 0);
-
-   if (LCodCompromisso <= 0) or (not FAgenda.PesquisarCompromisso(LCodCompromisso)) then
-     raise Exception.Create('Compromisso não encontrado!');
-
-   Application.CreateForm(TForm_Cadastro_Compromisso, Form_Cadastro_Compromisso);
-   try
-     Form_Cadastro_Compromisso.AlterarCompromisso(FAgenda.BuscarCompromisso(LCodCompromisso));
-
-     if Form_Cadastro_Compromisso.ModalResult = mrOk then
-       FAgenda.AlterarAgendamento(TCompromisso.New.Codigo(LCodCompromisso)
-                                                  .DataInicio(Form_Cadastro_Compromisso.DateInicio.Date)
-                                                  .HoraInicio(Form_Cadastro_Compromisso.TimeInicio.Time)
-                                                  .DataFim(Form_Cadastro_Compromisso.DateFinalizacao.Date)
-                                                  .HoraFim(Form_Cadastro_Compromisso.TimeFim.Time)
-                                                  .Assunto(Form_Cadastro_Compromisso.EdtAssunto.Text)
-                                                  .Descricao(Form_Cadastro_Compromisso.MemoDescricao.Text)
-                                  );
-   finally
-     FreeAndNil(Form_Cadastro_Compromisso);
-   end;
-
-   AtualizarGrid(FAgenda);
+  FControllerPrincipal.Alterar;
+  AtualizarGrid(FControllerPrincipal.Agenda);
 end;
 
 procedure TForm_Principal.BtnExcluirClick(Sender: TObject);
-var
-  LInputCodCompromisso: string;
-  LCodCompromisso: integer;
 begin
-  if not InputQuery('Exclusão de Compromisso','Informe o código do compromisso a ser excluído:', LInputCodCompromisso) then
-     Exit;
+  if FControllerPrincipal.Agenda.Compromissos.Count = 0 then
+    raise Exception.Create('Não há compromissos para excluir!');
 
-  LCodCompromisso := StrToIntDef(LInputCodCompromisso, 0);
-
-  if (LCodCompromisso <= 0) or (not FAgenda.PesquisarCompromisso(LCodCompromisso)) then
-    raise Exception.Create('Compromisso não encontrado!');
-
-  FAgenda.RemoverAgendamento(LCodCompromisso);
-
-  AtualizarGrid(FAgenda)
+  FControllerPrincipal.Excluir;
+  AtualizarGrid(FControllerPrincipal.Agenda);
 end;
 
 procedure TForm_Principal.BtnPesquisarClick(Sender: TObject);
-var
-  LAgenda: IAgenda;
 begin
-  Application.CreateForm(TForm_Pesquisa_Compromissos, Form_Pesquisa_Compromissos);
-  try
-    LAgenda := TAgenda.New;
-    LAgenda := FAgenda;
+  if FControllerPrincipal.Agenda.Compromissos.Count = 0 then
+    raise Exception.Create('Não há compromissos para pesquisar!');
 
-    Form_Pesquisa_Compromissos.Pesquisar(LAgenda);
-
-    if Form_Pesquisa_Compromissos.ModalResult = mrOk then
-      AtualizarGrid(Form_Pesquisa_Compromissos.Agenda)
-    else
-      AtualizarGrid(FAgenda);
-
-  finally
-    FreeAndNil(Form_Pesquisa_Compromissos);
-  end;
+  FControllerPrincipal.Pesquisar;
+  AtualizarGrid(FControllerPrincipal.Agenda);
 end;
 
 end.
